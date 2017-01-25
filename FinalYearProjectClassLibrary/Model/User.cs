@@ -7,7 +7,7 @@ using FinalYearProjectClassLibrary.Model;
 
 namespace FinalYearProjectClassLibrary.Model
 {
-    public class User
+    public class User 
     {
         Guid UserUID { get; set; }
         String FirstName { get; set; }

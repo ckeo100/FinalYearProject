@@ -7,7 +7,7 @@ using System.Net.Http;
 
 namespace FinalYearProjectClassLibrary.Model
 {
-    public class EmployerUser
+    public class EmployerUser : User
     {
         public String RecruiterEmail { get; set; }
         public String PostedJobListJob { get; set; }
