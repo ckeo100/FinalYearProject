@@ -4,4 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
-    android:minHeight="25px" />
+    android:minHeight="25px">
+    <Button
+        android:text="Get User's Current Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCurrentLocation"
+        android:layout_marginTop="105.5dp"
+        android:layout_marginBottom="5dp" />
+    <Button
+        android:text="User Job List"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUserJobList" />
+</LinearLayout>
