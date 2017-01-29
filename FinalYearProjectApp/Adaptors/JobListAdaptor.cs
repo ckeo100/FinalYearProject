@@ -61,6 +61,7 @@ namespace FinalYearProjectApp.Adaptors
             }
             //assigns the row text to the text of the current item jobName
             convertView.FindViewById<TextView>(Android.Resource.Id.Text1).Text = item.JobName;
+            //convertView.FindViewById<TextView>(Android.Resource.).Text = item.JobUID.ToString();
             return convertView;
         }
     }

@@ -54,7 +54,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txvJobDescription" />
+        android:id="@+id/lblJobDescription" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100.5dp"
