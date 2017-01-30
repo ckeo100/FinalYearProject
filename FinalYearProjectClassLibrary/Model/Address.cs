@@ -13,5 +13,6 @@ namespace FinalYearProjectClassLibrary.Model
         public String LocationLIne2 { get; set; }
         public String LocationCity { get; set; }
         public String LocationPostCode { get; set; }
+        
     }
 }

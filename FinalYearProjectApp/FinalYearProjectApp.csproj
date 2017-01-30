@@ -92,11 +92,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adaptors\JobListAdaptor.cs" />
-    <Compile Include="AppServices\LocationService.cs" />
+    <Compile Include="AppServices\LocationManagerService.cs" />
+    <Compile Include="AppServices\MapService.cs" />
     <Compile Include="JobDetailsActivity.cs" />
     <Compile Include="LocationTracker.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserJobListActivity.cs" />
@@ -119,6 +121,9 @@
     <AndroidResource Include="Resources\layout\JobDetails.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\MapView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -132,7 +137,9 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FinalYearProjectClassLibrary\FinalYearProjectClassLibrary.csproj">

@@ -23,6 +23,7 @@ namespace FinalYearProjectClassLibrary.Model
         public int JobSalaruMax { get; set; }
         public String JobDescription { get; set; }
         public Address JobAddress { get; set; }
+        public string RecruiterEmail {get; set;}
 
     }
     public class JobModel

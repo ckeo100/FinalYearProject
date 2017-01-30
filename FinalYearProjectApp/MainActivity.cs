@@ -18,6 +18,7 @@ namespace FinalYearProjectApp
     {
         public Button btnUserLocation;
         public Button btnUserList;
+        public Button btnGoToMapView;
 
 
         protected override void OnCreate(Bundle bundle)
@@ -26,6 +27,7 @@ namespace FinalYearProjectApp
             SetContentView(Resource.Layout.Main);
             btnUserLocation = FindViewById<Button>(Resource.Id.btnCurrentLocation);
             btnUserList = FindViewById<Button>(Resource.Id.btnUserJobList);
+            btnGoToMapView = FindViewById<Button>(Resource.Id.btnToMapView);
             HandleEvents();
             // Set our view from the "main" layout resource
 
@@ -35,7 +37,14 @@ namespace FinalYearProjectApp
         {
             btnUserLocation.Click += btnUserLocation_Click;
             btnUserList.Click += btnUserList_Click;
+            btnGoToMapView.Click += btnGoToMapView_Click;
             
+        }
+
+        private void btnGoToMapView_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(Map));
+            StartActivity(intent);
         }
 
         private void btnUserList_Click(object sender, EventArgs e)
