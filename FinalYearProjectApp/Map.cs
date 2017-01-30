@@ -33,10 +33,12 @@ namespace FinalYearProjectApp
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.MapView);
-            SetUpMap();
+            
 
             InitializeLocationManager();
-            // Create your application here
+            
+            SetUpMap();
+            
         }
 
         private void InitializeLocationManager()
@@ -83,14 +85,19 @@ namespace FinalYearProjectApp
             };
         }
 
-        public void OnMapReady(GoogleMap googleMap)//, Location location)
+        public void OnMapReady(GoogleMap googleMap)
         {
+            //Geocoder geocoder = new Geocoder(this);
             gMap = googleMap;
             gMap.MyLocationEnabled = true;
 
-            //latitude = location.Latitude;
-            //longitude = location.Longitude
 
+            Criteria criteria = new Criteria();
+            //LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            String provider = locationManager.GetBestProvider(criteria, false);
+            Location currentLocation = locationManager.GetLastKnownLocation(provider);
+            latitude = currentLocation.Latitude;
+            longitude = currentLocation.Longitude;
             userPostion = new LatLng(latitude, longitude);
             gMap.MoveCamera(CameraUpdateFactory.NewLatLng(userPostion));
             gMap.AnimateCamera(CameraUpdateFactory.ZoomTo(15));
@@ -111,7 +118,7 @@ namespace FinalYearProjectApp
                 //DisplayAddress(address);
                 latitude = currentGPSLocation.Latitude;
                 longitude = currentGPSLocation.Longitude;
-
+                
                 userPostion = new LatLng(latitude, longitude);
                 gMap.MoveCamera(CameraUpdateFactory.NewLatLng(userPostion));
                 gMap.AnimateCamera(CameraUpdateFactory.ZoomTo(15));
