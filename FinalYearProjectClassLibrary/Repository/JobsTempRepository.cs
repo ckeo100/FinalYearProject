@@ -43,7 +43,7 @@ namespace FinalYearProjectClassLibrary.Repository
             job1.JobSalaryMin = 34000;
             job1.JobSalaruMax = 50000;
             job1.JobDescription = "Standard Software developer Job";
-            job1.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = -1.8861910000000535, Latitiude = 52.483079 };
+            job1.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = -1.88551, Latitiude = 52.482949 };
             job1.RecruiterEmail = "RecruiterEMail@gmail.com";
             //return jobTempRepository.GetAllJobs();
             jobs.Add(job1);
@@ -74,6 +74,33 @@ namespace FinalYearProjectClassLibrary.Repository
             //return jobTempRepository.GetAllJobs();
             job2.RecruiterEmail = "RecruiterEMail@gmail.com";
             jobs.Add(job2);
+
+            Job job3 = new Job();
+            job3.JobUID = Guid.Parse("3D4746E5-8393-4096-B905-2D9E804AB732");
+            job3.EmployeeUID = Guid.Parse("033D06AF-CEBD-4067-AB57-78AECFD42858");
+            job3.JobName = "OutOfBoundsJob";
+            List<string> tagList3 = new List<string>();
+            tagList3.Add("C#");
+            tagList3.Add("Software");
+            tagList3.Add("Engineer");
+            job3.JobTags = tagList2;
+            job3.JobEmploymentType = "Full-Time";
+            List<string> jobBasicQaulification3 = new List<string>();
+            jobBasicQaulification3.Add("BSc Degree in a Relative field(Computer Science, Programming, Software Engineer, Etc)");
+            job3.JobBasicQualification = jobBasicQaulification3;
+            List<string> additionalSkillsAndQaulifications3 = new List<string>();
+            additionalSkillsAndQaulifications3.Add("C#");
+            job3.JobAdditionalSkillsAndQaulifications = additionalSkillsAndQaulifications3;
+            List<string> perferedSkills3 = new List<string>();
+            job3.JobPerferedSkillsAndQaulifications = perferedSkills3;
+            job3.JobSalaryRate = "Annual";
+            job3.JobSalaryMin = 34000;
+            job3.JobSalaruMax = 50000;
+            job3.JobDescription = "Standard Software Engineer Job";
+            job3.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = 0.1248, Latitiude = 51.4995 };
+            //return jobTempRepository.GetAllJobs();
+            job3.RecruiterEmail = "RecruiterEMail@gmail.com";
+            jobs.Add(job3);
 
         }
 

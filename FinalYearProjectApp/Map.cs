@@ -97,17 +97,15 @@ namespace FinalYearProjectApp
             Criteria criteria = new Criteria();
             //LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
             String provider = locationManager.GetBestProvider(criteria, false);
-            Location currentLocation = locationManager.GetLastKnownLocation(provider);
-            latitude = currentLocation.Latitude;
-            longitude = currentLocation.Longitude;
-            userPostion = new LatLng(latitude, longitude);
-            gMap.MoveCamera(CameraUpdateFactory.NewLatLng(userPostion));
-            gMap.AnimateCamera(CameraUpdateFactory.ZoomTo(15));
-
-            if (gMap != null)
+            if (locationManager.GetLastKnownLocation(provider) != null)
             {
+                Location currentLocation = locationManager.GetLastKnownLocation(provider);
+                latitude = currentLocation.Latitude;
+                longitude = currentLocation.Longitude;
+                userPostion = new LatLng(latitude, longitude);
+
                 List<JobAd> jobAdList = new List<JobAd>();
-                jobAdList = jobAdModel.GetAllJobAds();
+                jobAdList = jobAdModel.GetLocalJobAd(latitude, longitude);
 
                 foreach (JobAd jobAd in jobAdList)
                 {
@@ -117,7 +115,15 @@ namespace FinalYearProjectApp
                     jobMarkerOpt.SetTitle(jobAd.jobTitle);
                     gMap.AddMarker(jobMarkerOpt);
                 }
+
+                gMap.MoveCamera(CameraUpdateFactory.NewLatLng(userPostion));
+                gMap.AnimateCamera(CameraUpdateFactory.ZoomTo(15));
             }
+
+            //if (gMap != null)
+            //{
+                
+            //}
             
 
         }
@@ -138,6 +144,19 @@ namespace FinalYearProjectApp
                 longitude = currentGPSLocation.Longitude;
                 
                 userPostion = new LatLng(latitude, longitude);
+
+                List<JobAd> jobAdList = new List<JobAd>();
+                jobAdList = jobAdModel.GetLocalJobAd(latitude, longitude);
+
+                foreach (JobAd jobAd in jobAdList)
+                {
+                    MarkerOptions jobMarkerOpt = new MarkerOptions();
+                    jobMarkerOpt.SetPosition(new LatLng(jobAd.latitude, jobAd.longitude));
+                    //jobMarkerOpt.SetPosition(new LatLng(52.483079, -1.8861910000000535));
+                    jobMarkerOpt.SetTitle(jobAd.jobTitle);
+                    gMap.AddMarker(jobMarkerOpt);
+                }
+
                 gMap.MoveCamera(CameraUpdateFactory.NewLatLng(userPostion));
                 gMap.AnimateCamera(CameraUpdateFactory.ZoomTo(15));
             }
