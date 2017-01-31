@@ -42,6 +42,7 @@
     <Compile Include="Model\EmployerUser.cs" />
     <Compile Include="Model\GeoLocation.cs" />
     <Compile Include="Model\Job.cs" />
+    <Compile Include="Model\JobAd.cs" />
     <Compile Include="Model\JobSeekerUser.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

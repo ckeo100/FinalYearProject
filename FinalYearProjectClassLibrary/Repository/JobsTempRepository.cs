@@ -43,7 +43,7 @@ namespace FinalYearProjectClassLibrary.Repository
             job1.JobSalaryMin = 34000;
             job1.JobSalaruMax = 50000;
             job1.JobDescription = "Standard Software developer Job";
-            job1.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = 52.4862, Latitiude = 1.8904 };
+            job1.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = -1.8861910000000535, Latitiude = 52.483079 };
             job1.RecruiterEmail = "RecruiterEMail@gmail.com";
             //return jobTempRepository.GetAllJobs();
             jobs.Add(job1);
@@ -70,7 +70,7 @@ namespace FinalYearProjectClassLibrary.Repository
             job2.JobSalaryMin = 34000;
             job2.JobSalaruMax = 50000;
             job2.JobDescription = "Standard Software Engineer Job";
-            job2.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = 52.4867, Latitiude = 1.8912 };
+            job2.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = -1.8881910000000535, Latitiude = 52.483079 };
             //return jobTempRepository.GetAllJobs();
             job2.RecruiterEmail = "RecruiterEMail@gmail.com";
             jobs.Add(job2);

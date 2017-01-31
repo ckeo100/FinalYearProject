@@ -13,6 +13,7 @@ using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Locations;
 using Android.Util;
+using FinalYearProjectClassLibrary.Model;
 
 namespace FinalYearProjectApp
 {
@@ -27,12 +28,13 @@ namespace FinalYearProjectApp
         Location currentGPSLocation;
         LocationManager locationManager;
         string locationProvider;
-
+        JobAdModel jobAdModel;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.MapView);
+            jobAdModel = new JobAdModel();
             
 
             InitializeLocationManager();
@@ -101,6 +103,22 @@ namespace FinalYearProjectApp
             userPostion = new LatLng(latitude, longitude);
             gMap.MoveCamera(CameraUpdateFactory.NewLatLng(userPostion));
             gMap.AnimateCamera(CameraUpdateFactory.ZoomTo(15));
+
+            if (gMap != null)
+            {
+                List<JobAd> jobAdList = new List<JobAd>();
+                jobAdList = jobAdModel.GetAllJobAds();
+
+                foreach (JobAd jobAd in jobAdList)
+                {
+                    MarkerOptions jobMarkerOpt = new MarkerOptions();
+                    jobMarkerOpt.SetPosition(new LatLng(jobAd.latitude, jobAd.longitude));
+                    //jobMarkerOpt.SetPosition(new LatLng(52.483079, -1.8861910000000535));
+                    jobMarkerOpt.SetTitle(jobAd.jobTitle);
+                    gMap.AddMarker(jobMarkerOpt);
+                }
+            }
+            
 
         }
 
