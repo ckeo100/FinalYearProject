@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FinalYearProjectClassLibrary.Model;
 using FinalYearProjectClassLibrary.Repository;
+using FinalYearProjectClassLibrary.Services;
 
 namespace FinalYearProjectClassLibrary.Model
 {
@@ -29,6 +30,7 @@ namespace FinalYearProjectClassLibrary.Model
     public class JobModel
     {
         JobsTempRepository jobTempRespository = new JobsTempRepository();
+        MathService mathService = new MathService();
         public List<Job> ShowAllJobs()
         {
             List<Job> JobList = jobTempRespository.GetAllJobs();
@@ -44,6 +46,32 @@ namespace FinalYearProjectClassLibrary.Model
         {
             List<Job> Jobs = new List<Job>();
             return Jobs;
+        }
+
+        public List<Job> GetLocalJobAd(double currentLatitude, double currentLongitude)
+        {
+            //radius of the search criteria circle 
+            double searchDistanceInKM = 8;
+            //radius of earth
+            double radiusOfTheEarthInKm = 6371;
+            double currentLatitudeRad = currentLatitude;
+            double currentLongitudeRad = currentLongitude;
+            double maxLat = currentLatitudeRad + mathService.ConvertRadianToDegree(searchDistanceInKM / radiusOfTheEarthInKm);
+            double minLat = currentLatitudeRad - mathService.ConvertRadianToDegree(searchDistanceInKM / radiusOfTheEarthInKm);
+            double maxLong = currentLongitudeRad + mathService.ConvertRadianToDegree(Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
+            double minLong = currentLongitudeRad - mathService.ConvertRadianToDegree(Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
+            List<Job> newJobsLIst = new List<Job>();
+
+            List<Job> fullJobList = ShowAllJobs();
+
+            IEnumerable<Job> searchCriteriaJobs =
+                from Job in fullJobList
+                where Job.JobAddress.Latitiude >= minLat && Job.JobAddress.Latitiude <= maxLat
+                && Job.JobAddress.Longitude >= minLong && Job.JobAddress.Longitude <= maxLong
+                select Job;
+
+
+            return searchCriteriaJobs.ToList();
         }
     }
 }

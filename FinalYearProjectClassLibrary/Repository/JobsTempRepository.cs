@@ -70,7 +70,7 @@ namespace FinalYearProjectClassLibrary.Repository
             job2.JobSalaryMin = 34000;
             job2.JobSalaruMax = 50000;
             job2.JobDescription = "Standard Software Engineer Job";
-            job2.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = -1.8881910000000535, Latitiude = 52.483079 };
+            job2.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = -1.5172, Latitiude = 52.3721 };
             //return jobTempRepository.GetAllJobs();
             job2.RecruiterEmail = "RecruiterEMail@gmail.com";
             jobs.Add(job2);
