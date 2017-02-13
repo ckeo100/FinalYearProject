@@ -10,7 +10,8 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using Android.Content;
-using FinalYearProjectClassLibrary.Model;
+//using FinalYearProjectClassLibrary.Model;
+using FinalYearProjectApp.Model;
 
 namespace FinalYearProjectApp
 {
@@ -31,20 +32,20 @@ namespace FinalYearProjectApp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.JobDetails);
+            SetContentView(Resource.Layout.JobAdDetails);
             txvJobLabel = FindViewById<TextView>(Resource.Id.lblJobName);
             txvEmploymentTypeText = FindViewById<TextView>(Resource.Id.txvEmploymentType);
             txvSalaryText = FindViewById<TextView>(Resource.Id.txvSalary);
             txvRequiredQualificationsAndSkillsText = FindViewById<TextView>(Resource.Id.txvRequiredQualificationsAndSkills);
             txvAddtionalQualificationsAndSkillsText = FindViewById<TextView>(Resource.Id.txvAdditionalQualifictionAndSkills);
             txvJobDescriptionText = FindViewById<TextView>(Resource.Id.txvJobDescription);
-            string jobGuidString = Intent.Extras.GetString("selectedJobGuid");
-            jobGuid = Guid.Parse(jobGuidString);
-            jobItem = jobModel.GetJob(jobGuid);
+            string jobString = Intent.Extras.GetString("selectedJobGuid");
+            //jobGuid = Guid.Parse(jobGuidString);
+            jobItem = jobModel.GetJob(jobString);
 
             txvJobLabel.Text = jobItem.JobName;
             txvEmploymentTypeText.Text += jobItem.JobEmploymentType;
-            string completeSalary = string.Format("{0}-{1} per {2}", jobItem.JobSalaryMin, jobItem.JobSalaruMax, jobItem.JobSalaryRate);
+            string completeSalary = string.Format("{0}-{1} per {2}", jobItem.JobSalaryMin, jobItem.JobSalaryMax, jobItem.JobSalaryRate);
             txvSalaryText.Text += completeSalary;
             foreach (string skill in jobItem.JobBasicQualification)
             {

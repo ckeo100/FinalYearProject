@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 using FinalYearProjectClassLibrary.Model;
 using FinalYearProjectClassLibrary.Repository;
 using FinalYearProjectClassLibrary.Services;
+using Newtonsoft.Json;
 
 namespace FinalYearProjectClassLibrary.Model
 {
+    public class id
+    {
+        [JsonProperty(PropertyName ="$oid")]
+        public string oid { get; set; }
+    }
+
     public class Job
     {
+        public id _id { get; set; }
         public Guid JobUID { get; set; }
         public Guid EmployeeUID { get; set; }
         public String JobName { get; set; }
@@ -21,7 +29,7 @@ namespace FinalYearProjectClassLibrary.Model
         public List<String> JobPerferedSkillsAndQaulifications { get; set; }
         public String JobSalaryRate { get; set; }
         public int JobSalaryMin { get; set; }
-        public int JobSalaruMax { get; set; }
+        public int JobSalaryMax { get; set; }
         public String JobDescription { get; set; }
         public Address JobAddress { get; set; }
         public string RecruiterEmail {get; set;}
@@ -31,6 +39,7 @@ namespace FinalYearProjectClassLibrary.Model
     {
         JobsTempRepository jobTempRespository = new JobsTempRepository();
         MathService mathService = new MathService();
+
         public List<Job> ShowAllJobs()
         {
             List<Job> JobList = jobTempRespository.GetAllJobs();

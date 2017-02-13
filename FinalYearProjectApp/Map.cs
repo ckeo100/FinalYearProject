@@ -13,7 +13,11 @@ using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Locations;
 using Android.Util;
-using FinalYearProjectClassLibrary.Model;
+//using FinalYearProjectClassLibrary.Model;
+using FinalYearProjectApp.Model;
+using FinalYearProjectApp.AppServices;
+using Java.Lang;
+using Newtonsoft.Json;
 
 namespace FinalYearProjectApp
 {
@@ -31,19 +35,68 @@ namespace FinalYearProjectApp
         public JobAdModel jobAdModel = new JobAdModel();
         public JobModel jobModel = new JobModel();
         List<JobAd> jobAds = new List<JobAd>();
+        //List<Job> retrievedJobs = new List<Job>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            //new GetData(this).Execute(UrlBuilder.getJobApi());
             SetContentView(Resource.Layout.MapView);
             //jobAdModel = new JobAdModel();
+            
             jobAds = new List<JobAd>();
-
+            
             InitializeLocationManager();
-
+            
             SetUpMap();
+            //GetData();
+            //Common common = new Common();
+            
+            //Common.getJobApi());
 
         }
+
+
+
+        //private class GetData :AsyncTask<string, Java.Lang.Void, string>
+        //{
+        //    private ProgressDialog pd = new ProgressDialog(Application.Context);
+        //    private Map activity;
+
+        //    public GetData(Map activity )
+        //    {
+        //        this.activity = activity;
+        //    }
+
+        //    protected override void OnPreExecute()
+        //    {
+        //        base.OnPreExecute();
+        //        pd.Window.SetType(WindowManagerTypes.SystemAlert);
+        //        pd.SetTitle("Please wait...");
+        //        pd.Show();
+        //    }
+        //    protected override string RunInBackground(params string[] @params)
+        //    {
+        //        string stream = null;
+        //        string urlString = @params[0];
+
+        //        HttpDataHandler http = new HttpDataHandler();
+        //        stream = http.GetHTTPData(urlString);
+        //        return stream;
+        //    }
+        //    protected override void OnPostExecute(string result)
+        //    {
+        //        base.OnPostExecute(result);
+                
+        //        List<Job> list = JsonConvert.DeserializeObject<List<Job>>(result);
+
+        //        pd.Dismiss();
+        //        //return list;
+
+                    
+        //    }
+        //}
 
         private void InitializeLocationManager()
         {
@@ -98,7 +151,7 @@ namespace FinalYearProjectApp
 
             Criteria criteria = new Criteria();
             //LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-            String provider = locationManager.GetBestProvider(criteria, false);
+            string provider = locationManager.GetBestProvider(criteria, false);
             if (locationManager.GetLastKnownLocation(provider) != null)
             {
                 Location currentLocation = locationManager.GetLastKnownLocation(provider);
@@ -124,7 +177,7 @@ namespace FinalYearProjectApp
                         //jobMarkerOpt.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueMagenta));
                         Marker marker = gMap.AddMarker(jobMarkerOpt);
                         JobAd newJobAd = new JobAd();
-                        newJobAd.jobAdGUID = job.JobUID;
+                        newJobAd.jobAdGUID = job.JobID;
                         newJobAd.jobTitle = job.JobName;
                         newJobAd.jobDetails = job.JobDescription;
                         newJobAd.jobMarkerID = marker.Id;
@@ -164,8 +217,8 @@ namespace FinalYearProjectApp
                 where JobAd.jobMarkerID == item.Id
                 select JobAd;
             Job selectedJob = jobModel.GetJob(selectedJobList.FirstOrDefault().jobAdGUID);
-            var intent = new Intent(this, typeof(JobDetailsActivity));
-            intent.PutExtra("selectedJobGuid", selectedJob.JobUID.ToString());
+            var intent = new Intent(this, typeof(JobAdDetails));
+            intent.PutExtra("selectedJobGuid", selectedJob.JobID.ToString());
             StartActivity(intent);
 
 
@@ -189,7 +242,7 @@ namespace FinalYearProjectApp
 
                 Criteria criteria = new Criteria();
                 //LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-                String provider = locationManager.GetBestProvider(criteria, false);
+                string provider = locationManager.GetBestProvider(criteria, false);
                 if (locationManager.GetLastKnownLocation(provider) != null)
                 {
                     Location currentLocation = locationManager.GetLastKnownLocation(provider);
@@ -216,7 +269,7 @@ namespace FinalYearProjectApp
                             Marker marker = gMap.AddMarker(jobMarkerOpt);
                             JobAd newJobAd = new JobAd
                             {
-                                jobAdGUID = job.JobUID,
+                                jobAdGUID = job.JobID,
                                 jobMarkerID = marker.Id,
                                 jobTitle = job.JobName,
                                 jobDetails = job.JobDescription,
@@ -241,5 +294,7 @@ namespace FinalYearProjectApp
 
 
         }
+
+
     }
 }

@@ -36,9 +36,6 @@ namespace FinalYearProjectApp
             addressText = FindViewById<TextView>(Resource.Id.txvAddressText);
             locationText = FindViewById<TextView>(Resource.Id.txvGPSLocation);
             getAddress = FindViewById<Button>(Resource.Id.btnGetAddress);
-
-            // addressText = FindViewById<TextView>(Resource.Id.txvAddressText);
-            // locationText = FindViewById<TextView>(Resource.Id.);
             FindViewById<TextView>(Resource.Id.btnGetAddress).Click += AddressButton_OnClick;
 
             InitializeLocationManager();

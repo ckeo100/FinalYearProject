@@ -10,7 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using FinalYearProjectClassLibrary;
-using FinalYearProjectClassLibrary.Model;
+using FinalYearProjectApp.Model;
+//using FinalYearProjectClassLibrary.Model;
 
 namespace FinalYearProjectApp.Adaptors
 {
@@ -42,8 +43,10 @@ namespace FinalYearProjectApp.Adaptors
 
         public override int Count
         {
+            
             get
             {
+                
                 return items.Count;
             }
         }
@@ -61,7 +64,7 @@ namespace FinalYearProjectApp.Adaptors
             }
             //assigns the row text to the text of the current item jobName
             convertView.FindViewById<TextView>(Android.Resource.Id.Text1).Text = item.JobName;
-            //convertView.FindViewById<TextView>(Android.Resource.).Text = item.JobUID.ToString();
+            //convertView.FindViewById<TextView>(Android.Resource.).Text = item.JobID.ToString();
             return convertView;
         }
     }

@@ -35,58 +35,9 @@ namespace FinalYearProjectClassLibrary.Model
 
         public List<JobAd> GetAllJobAds()
         {
-            //List<JobAd> JobAds = new List<JobAd>();
-
-            //List<Job> jobList = jobModel.ShowAllJobs();
-
-
-            //foreach (Job job in jobList)
-            //{
-            //    JobAd newJobAd = new JobAd();
-            //    newJobAd.jobAdGUID = job.JobUID;
-            //    newJobAd.jobTitle = job.JobName;
-            //    newJobAd.jobDetails = job.JobDescription;
-            //    newJobAd.latitude = job.JobAddress.Latitiude;
-            //    newJobAd.longitude = job.JobAddress.Longitude;
-            //    JobAds.Add(newJobAd);
-            //}
                 
             return jobAds;
         }
-        //public List<JobAd> GetLocalJobAd(double currentLatitude, double currentLongitude)
-        //{
-        //    //radius of the search criteria circle 
-        //    double searchDistanceInKM = 8;
-        //    //radius of earth
-        //    double radiusOfTheEarthInKm = 6371;
-        //    double currentLatitudeRad = currentLatitude;
-        //    double currentLongitudeRad = currentLongitude;
-        //    double maxLat = currentLatitudeRad + mathService.ConvertRadianToDegree(searchDistanceInKM/radiusOfTheEarthInKm);
-        //    double minLat = currentLatitudeRad - mathService.ConvertRadianToDegree(searchDistanceInKM/radiusOfTheEarthInKm);
-        //    double maxLong = currentLongitudeRad + mathService.ConvertRadianToDegree(Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
-        //    double minLong = currentLongitudeRad - mathService.ConvertRadianToDegree(Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
-        //    List<JobAd> JobAds = new List<JobAd>();
-
-        //    List<Job> jobList = jobModel.ShowAllJobs();
-
-        //    IEnumerable<Job> searchCriteriaJobs =
-        //        from Job in jobList
-        //        where Job.JobAddress.Latitiude >= minLat && Job.JobAddress.Latitiude <= maxLat
-        //        && Job.JobAddress.Longitude >= minLong && Job.JobAddress.Longitude <= maxLong
-        //        select Job;
-        //    foreach (Job job in searchCriteriaJobs)
-        //    {
-        //        JobAd newJobAd = new JobAd();
-        //        newJobAd.jobAdGUID = job.JobUID;
-        //        newJobAd.jobTitle = job.JobName;
-        //        newJobAd.jobDetails = job.JobDescription;
-        //        newJobAd.latitude = job.JobAddress.Latitiude;
-        //        newJobAd.longitude = job.JobAddress.Longitude;
-        //        JobAds.Add(newJobAd);
-
-        //    }
-
-        //    return JobAds;
-        //}
+       
     }
 }

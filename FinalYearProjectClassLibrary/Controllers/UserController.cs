@@ -10,6 +10,7 @@ namespace FinalYearProjectClassLibrary.Controllers
 {
     public class UserController
     {
+
         public JobModel jobModel = new JobModel();
         //private FinalYearProjectClassLibrary.Repository.JobsTempRepository jobTempRepository = new FinalYearProjectClassLibrary.Repository.JobsTempRepository();
         public UserController()

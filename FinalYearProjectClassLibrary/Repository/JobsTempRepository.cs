@@ -41,7 +41,7 @@ namespace FinalYearProjectClassLibrary.Repository
             job1.JobPerferedSkillsAndQaulifications = perferedSkills;
             job1.JobSalaryRate = "Annual";
             job1.JobSalaryMin = 34000;
-            job1.JobSalaruMax = 50000;
+            job1.JobSalaryMax = 50000;
             job1.JobDescription = "Standard Software developer Job";
             job1.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = -1.88551, Latitiude = 52.482949 };
             job1.RecruiterEmail = "RecruiterEMail@gmail.com";
@@ -68,7 +68,7 @@ namespace FinalYearProjectClassLibrary.Repository
             job2.JobPerferedSkillsAndQaulifications = perferedSkills2;
             job2.JobSalaryRate = "Annual";
             job2.JobSalaryMin = 34000;
-            job2.JobSalaruMax = 50000;
+            job2.JobSalaryMax = 50000;
             job2.JobDescription = "Standard Software Engineer Job";
             job2.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = -1.5172, Latitiude = 52.3721 };
             //return jobTempRepository.GetAllJobs();
@@ -95,10 +95,10 @@ namespace FinalYearProjectClassLibrary.Repository
             job3.JobPerferedSkillsAndQaulifications = perferedSkills3;
             job3.JobSalaryRate = "Annual";
             job3.JobSalaryMin = 34000;
-            job3.JobSalaruMax = 50000;
+            job3.JobSalaryMax = 50000;
             job3.JobDescription = "Standard Software Engineer Job";
             job3.JobAddress = new Address { LocationLine1 = "Example Road 231", LocationLIne2 = "Binary Hill", LocationCity = "Samplevill", LocationPostCode = "faihafhpaf", Longitude = 0.1248, Latitiude = 51.4995 };
-            //return jobTempRepository.GetAllJobs();
+            
             job3.RecruiterEmail = "RecruiterEMail@gmail.com";
             jobs.Add(job3);
 
