@@ -153,11 +153,13 @@ namespace FinalYearProjectApp
 
 
             Criteria criteria = new Criteria();
+            //string provider = locationManager.GetBestProvider(criteria, false);
+            Location testCurrentLocation = getLastKnownLocation();
             //LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-            string provider = locationManager.GetBestProvider(criteria, false);
-            if (locationManager.GetLastKnownLocation(provider) != null)
+
+            if (testCurrentLocation != null)
             {
-                Location currentLocation = locationManager.GetLastKnownLocation(provider);
+                Location currentLocation = testCurrentLocation;
                 latitude = currentLocation.Latitude;
                 longitude = currentLocation.Longitude;
                 userPostion = new LatLng(latitude, longitude);
@@ -296,6 +298,27 @@ namespace FinalYearProjectApp
             }
 
 
+        }
+
+        private Location getLastKnownLocation()
+        {
+            //locationManager = Application.Context.
+            List<string> providers = new List<string>(locationManager.GetProviders(true));// locationManager.GetProviders(true);
+            Location currentBestLocation = null;
+            foreach (string provider in providers)
+            {
+                Location currentlyTestedLocation = locationManager.GetLastKnownLocation(provider);
+                if (currentlyTestedLocation == null)
+                {
+                    continue;
+                }
+                //if currentlyTestedLocation has better Accuracy then the current
+                if (currentBestLocation == null || currentlyTestedLocation.Accuracy < currentlyTestedLocation.Accuracy)
+                {
+                    currentBestLocation = currentlyTestedLocation;
+                }
+            }
+            return currentBestLocation;
         }
 
 
