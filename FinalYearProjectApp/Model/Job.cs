@@ -19,6 +19,12 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using System.Json;
+using System.Net.Http;
+
+
+
+
+
 
 namespace FinalYearProjectApp.Model
 {
@@ -28,8 +34,8 @@ namespace FinalYearProjectApp.Model
     }
     public class Job
     {
-        public string JobID { get; set; }
-        public string EmployeeID { get; set; }
+        public string JobUID { get; set; }
+        public string EmployeeUID { get; set; }
         public string JobName { get; set; }
         public List<string> JobTags { get; set; }
         public string JobEmploymentType { get; set; }
@@ -37,8 +43,8 @@ namespace FinalYearProjectApp.Model
         public List<string> JobAdditionalSkillsAndQaulifications { get; set; }
         public List<string> JobPerferedSkillsAndQaulifications { get; set; }
         public string JobSalaryRate { get; set; }
-        public int JobSalaryMin { get; set; }
-        public int JobSalaryMax { get; set; }
+        public double JobSalaryMin { get; set; }
+        public double JobSalaryMax { get; set; }
         public string JobDescription { get; set; }
         public Address JobAddress { get; set; }
         public string RecruiterEmail { get; set; }
@@ -46,24 +52,26 @@ namespace FinalYearProjectApp.Model
     }
     public class JobModel
     {
-        private async Task<JsonValue> GetJsonAsync (string url)
+        public async Task<List<Job>> DownloadDataAsync()
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
-            request.ContentType = "application/json";
-            request.Method = "GET";
+            string url = UrlBuilder.getJobApi();
 
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                using (Stream stream = response.GetResponseStream())
-                {
-                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                    //.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+            var httpClient = new HttpClient();
+            var downloadTask = httpClient.GetStringAsync(url);//.ConfigureAwait(continueOnCapturedContext: false);
+            string content = await downloadTask;
+            List<Job> jobList= new List<Job>();
+            jobList = JsonConvert.DeserializeObject<List<Job>>(content);
+            return jobList;
+            //JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-                    return jsonDoc;
-                }
-            }
+
+            //var result = JsonConvert.DeserializeObject<RootObject>(content);
+            //JsonValue jsonValue = JsonValue.Parse(content);
+            //JsonObject jsonObject = jsonValue as JsonObject;
+            //IList<JsonToken> tokenList = jsonObject.Select(JsonConvert.DeserializeObject<T>).ToList();
+            //return content;
+            //Console.Out.WriteLine("Response: \r\n {0}", content);
         }
-
 
         MathService mathService = new MathService();
         public List<Job> ShowAllJobs()
@@ -112,9 +120,15 @@ namespace FinalYearProjectApp.Model
         public List<Job> GetLocalJobAd(double currentLatitude, double currentLongitude)
         {
             //IMongoCollection<Job> jobColl = MongoConnection();
-            //radius of the search criteria circle 
-            var jsonList = GetJsonAsync(UrlBuilder.getJobApi()).Result;
-            var jobList = JsonConvert.DeserializeObject<List<Job>>(jsonList.ToString());
+            //radius of the search criteria circle  
+            string url = UrlBuilder.getJobApi();
+            //JobModel.GetData getData = new GetData();
+            //HttpDataHandler http = new HttpDataHandler();
+
+            //string stream = http.GetHTTPData(url);
+            List<Job> list = DownloadDataAsync().Result;//JsonConvert.DeserializeObject<List<Job>>(stream);
+            //var jsonList = getData.jobList;//GetData(); //GetJsonAsync(UrlBuilder.getJobApi()).Result;
+            //var jobList = JsonConvert.DeserializeObject<List<Job>>(jsonList.ToString());
             double searchDistanceInKM = 8;
             //radius of earth
             double radiusOfTheEarthInKm = 6371;
@@ -124,7 +138,7 @@ namespace FinalYearProjectApp.Model
             double minLat = currentLatitudeRad - mathService.ConvertRadianToDegree(searchDistanceInKM / radiusOfTheEarthInKm);
             double maxLong = currentLongitudeRad + mathService.ConvertRadianToDegree(System.Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / System.Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
             double minLong = currentLongitudeRad - mathService.ConvertRadianToDegree(System.Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / System.Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
-            List<Job> newJobsLIst = jobList;
+            
 
             //List<Job> fullJobList = ShowAllJobs();
 
@@ -135,7 +149,7 @@ namespace FinalYearProjectApp.Model
             //).ToList();
 
             //return searchCriteriaJobs.ToList();
-            List<Job> searchCriteriaJobs = jobList.Where(j => j.JobAddress.Latitiude >= minLat
+            List<Job> searchCriteriaJobs = list.Where(j => j.JobAddress.Latitiude >= minLat
            && j.JobAddress.Latitiude <= maxLat
            && j.JobAddress.Longitude >= minLong
            && j.JobAddress.Longitude <= maxLong).ToList();//.SelectMany(j => j.JobAddress.Latitiude >= minLat

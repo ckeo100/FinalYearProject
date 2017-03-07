@@ -18,6 +18,8 @@ using FinalYearProjectApp.Model;
 using FinalYearProjectApp.AppServices;
 using Java.Lang;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace FinalYearProjectApp
 {
@@ -34,6 +36,7 @@ namespace FinalYearProjectApp
         string locationProvider;
         public JobAdModel jobAdModel = new JobAdModel();
         public JobModel jobModel = new JobModel();
+        public List<Job> jobList = new List<Job>();
         List<JobAd> jobAds = new List<JobAd>();
         //List<Job> retrievedJobs = new List<Job>();
 
@@ -48,55 +51,54 @@ namespace FinalYearProjectApp
             jobAds = new List<JobAd>();
             
             InitializeLocationManager();
-            
-            SetUpMap();
-            //GetData();
-            //Common common = new Common();
-            
-            //Common.getJobApi());
+
+            //get the current 
+            new GetData(this).Execute(UrlBuilder.getJobApi());
 
         }
 
+       
 
 
-        //private class GetData :AsyncTask<string, Java.Lang.Void, string>
-        //{
-        //    private ProgressDialog pd = new ProgressDialog(Application.Context);
-        //    private Map activity;
+        private class GetData :AsyncTask<string, Java.Lang.Void, string>
+        {
+            private ProgressDialog pd = new ProgressDialog(Application.Context);
+            private Map activity;
 
-        //    public GetData(Map activity )
-        //    {
-        //        this.activity = activity;
-        //    }
+            public GetData(Map activity )
+            {
+                this.activity = activity;
+            }
 
-        //    protected override void OnPreExecute()
-        //    {
-        //        base.OnPreExecute();
-        //        pd.Window.SetType(WindowManagerTypes.SystemAlert);
-        //        pd.SetTitle("Please wait...");
-        //        pd.Show();
-        //    }
-        //    protected override string RunInBackground(params string[] @params)
-        //    {
-        //        string stream = null;
-        //        string urlString = @params[0];
+            protected override void OnPreExecute()
+            {
+                base.OnPreExecute();
+                pd.Window.SetType(WindowManagerTypes.SystemAlert);
+                pd.SetTitle("Please wait...");
+                pd.Show();
+            }
+            protected override string RunInBackground(params string[] @params)
+            {
+                string stream = null;
+                string urlString = @params[0];
 
-        //        HttpDataHandler http = new HttpDataHandler();
-        //        stream = http.GetHTTPData(urlString);
-        //        return stream;
-        //    }
-        //    protected override void OnPostExecute(string result)
-        //    {
-        //        base.OnPostExecute(result);
+                HttpDataHandler http = new HttpDataHandler();
+                stream = http.GetHTTPData(urlString);
+                return stream;
+            }
+            protected override void OnPostExecute(string result)
+            {
+                base.OnPostExecute(result);
+
                 
-        //        List<Job> list = JsonConvert.DeserializeObject<List<Job>>(result);
+                activity.jobList = JsonConvert.DeserializeObject<List<Job>>(result);
+                activity.SetUpMap();
+                pd.Dismiss();
+                //return list;
 
-        //        pd.Dismiss();
-        //        //return list;
 
-                    
-        //    }
-        //}
+            }
+        }
 
         private void InitializeLocationManager()
         {
@@ -147,6 +149,7 @@ namespace FinalYearProjectApp
             //Geocoder geocoder = new Geocoder(this);
             gMap = googleMap;
             gMap.MyLocationEnabled = true;
+            
 
 
             Criteria criteria = new Criteria();
@@ -158,9 +161,9 @@ namespace FinalYearProjectApp
                 latitude = currentLocation.Latitude;
                 longitude = currentLocation.Longitude;
                 userPostion = new LatLng(latitude, longitude);
-
-                List<Job> jobList = new List<Job>();
-                jobList = jobModel.GetLocalJobAd(latitude, longitude);
+                //new GetData(this).Execute(UrlBuilder.getJobApi());
+                //List<Job> jobList = new List<Job>();
+                //CurrentJobList = DownloadDataAsync().Result;//jobModel.GetLocalJobAd(latitude, longitude);
 
                 if (jobList != null)
                 {
@@ -177,7 +180,7 @@ namespace FinalYearProjectApp
                         //jobMarkerOpt.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueMagenta));
                         Marker marker = gMap.AddMarker(jobMarkerOpt);
                         JobAd newJobAd = new JobAd();
-                        newJobAd.jobAdGUID = job.JobID;
+                        newJobAd.jobAdGUID = job.JobUID;
                         newJobAd.jobTitle = job.JobName;
                         newJobAd.jobDetails = job.JobDescription;
                         newJobAd.jobMarkerID = marker.Id;
@@ -218,7 +221,7 @@ namespace FinalYearProjectApp
                 select JobAd;
             Job selectedJob = jobModel.GetJob(selectedJobList.FirstOrDefault().jobAdGUID);
             var intent = new Intent(this, typeof(JobAdDetails));
-            intent.PutExtra("selectedJobGuid", selectedJob.JobID.ToString());
+            intent.PutExtra("selectedJobGuid", selectedJob.JobUID.ToString());
             StartActivity(intent);
 
 
@@ -269,7 +272,7 @@ namespace FinalYearProjectApp
                             Marker marker = gMap.AddMarker(jobMarkerOpt);
                             JobAd newJobAd = new JobAd
                             {
-                                jobAdGUID = job.JobID,
+                                jobAdGUID = job.JobUID,
                                 jobMarkerID = marker.Id,
                                 jobTitle = job.JobName,
                                 jobDetails = job.JobDescription,

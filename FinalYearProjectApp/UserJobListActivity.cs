@@ -57,7 +57,7 @@ namespace FinalYearProjectApp
 
             var intent = new Intent();
             intent.SetClass(this, typeof(JobDetailsActivity));
-            intent.PutExtra("selectedJobGuid", job.JobID.ToString());
+            intent.PutExtra("selectedJobGuid", job.JobUID.ToString());
 
             StartActivityForResult(intent, 100);
            
