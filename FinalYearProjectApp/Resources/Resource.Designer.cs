@@ -1825,11 +1825,11 @@ namespace FinalYearProjectApp
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b0080
-			public const int LTVUserJobs = 2131427456;
+			// aapt resource value: 0x7f0b008c
+			public const int LTVUserJobs = 2131427468;
 			
-			// aapt resource value: 0x7f0b0073
-			public const int action0 = 2131427443;
+			// aapt resource value: 0x7f0b0078
+			public const int action0 = 2131427448;
 			
 			// aapt resource value: 0x7f0b0050
 			public const int action_bar = 2131427408;
@@ -1855,8 +1855,8 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0051
 			public const int action_context_bar = 2131427409;
 			
-			// aapt resource value: 0x7f0b0077
-			public const int action_divider = 2131427447;
+			// aapt resource value: 0x7f0b007c
+			public const int action_divider = 2131427452;
 			
 			// aapt resource value: 0x7f0b0002
 			public const int action_menu_divider = 2131427330;
@@ -1903,29 +1903,38 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b006e
 			public const int btnAddJobList = 2131427438;
 			
-			// aapt resource value: 0x7f0b006f
-			public const int btnCurrentLocation = 2131427439;
+			// aapt resource value: 0x7f0b0074
+			public const int btnCurrentLocation = 2131427444;
 			
 			// aapt resource value: 0x7f0b0060
 			public const int btnGetAddress = 2131427424;
 			
-			// aapt resource value: 0x7f0b0071
-			public const int btnToMapView = 2131427441;
+			// aapt resource value: 0x7f0b0072
+			public const int btnLogin = 2131427442;
 			
-			// aapt resource value: 0x7f0b0070
-			public const int btnUserJobList = 2131427440;
+			// aapt resource value: 0x7f0b0073
+			public const int btnRegister = 2131427443;
+			
+			// aapt resource value: 0x7f0b008b
+			public const int btnRegisterAccount = 2131427467;
+			
+			// aapt resource value: 0x7f0b0076
+			public const int btnToMapView = 2131427446;
+			
+			// aapt resource value: 0x7f0b0075
+			public const int btnUserJobList = 2131427445;
 			
 			// aapt resource value: 0x7f0b0039
 			public const int buttonPanel = 2131427385;
 			
-			// aapt resource value: 0x7f0b0074
-			public const int cancel_action = 2131427444;
+			// aapt resource value: 0x7f0b0079
+			public const int cancel_action = 2131427449;
 			
 			// aapt resource value: 0x7f0b0047
 			public const int checkbox = 2131427399;
 			
-			// aapt resource value: 0x7f0b007a
-			public const int chronometer = 2131427450;
+			// aapt resource value: 0x7f0b007f
+			public const int chronometer = 2131427455;
 			
 			// aapt resource value: 0x7f0b0029
 			public const int collapseActionView = 2131427369;
@@ -1957,8 +1966,32 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0026
 			public const int end = 2131427366;
 			
-			// aapt resource value: 0x7f0b007f
-			public const int end_padder = 2131427455;
+			// aapt resource value: 0x7f0b0084
+			public const int end_padder = 2131427460;
+			
+			// aapt resource value: 0x7f0b0071
+			public const int etxLoginPassword = 2131427441;
+			
+			// aapt resource value: 0x7f0b0070
+			public const int etxLoginUserEmail = 2131427440;
+			
+			// aapt resource value: 0x7f0b0088
+			public const int etxRegisterConfirmEmail = 2131427464;
+			
+			// aapt resource value: 0x7f0b008a
+			public const int etxRegisterConfirmPassword = 2131427466;
+			
+			// aapt resource value: 0x7f0b0087
+			public const int etxRegisterEmailAddress = 2131427463;
+			
+			// aapt resource value: 0x7f0b0086
+			public const int etxRegisterLastName = 2131427462;
+			
+			// aapt resource value: 0x7f0b0089
+			public const int etxRegisterPassword = 2131427465;
+			
+			// aapt resource value: 0x7f0b0085
+			public const int etxResgisterFirstName = 2131427461;
 			
 			// aapt resource value: 0x7f0b0033
 			public const int expand_activities_button = 2131427379;
@@ -1987,8 +2020,8 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0034
 			public const int image = 2131427380;
 			
-			// aapt resource value: 0x7f0b007e
-			public const int info = 2131427454;
+			// aapt resource value: 0x7f0b0083
+			public const int info = 2131427459;
 			
 			// aapt resource value: 0x7f0b006a
 			public const int lblAdditionalQualificationsAndSkills = 2131427434;
@@ -2011,11 +2044,11 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0015
 			public const int light = 2131427349;
 			
-			// aapt resource value: 0x7f0b0078
-			public const int line1 = 2131427448;
+			// aapt resource value: 0x7f0b007d
+			public const int line1 = 2131427453;
 			
-			// aapt resource value: 0x7f0b007c
-			public const int line3 = 2131427452;
+			// aapt resource value: 0x7f0b0081
+			public const int line3 = 2131427457;
 			
 			// aapt resource value: 0x7f0b0016
 			public const int listMode = 2131427350;
@@ -2023,11 +2056,11 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0036
 			public const int list_item = 2131427382;
 			
-			// aapt resource value: 0x7f0b0072
-			public const int map = 2131427442;
+			// aapt resource value: 0x7f0b0077
+			public const int map = 2131427447;
 			
-			// aapt resource value: 0x7f0b0076
-			public const int media_actions = 2131427446;
+			// aapt resource value: 0x7f0b007b
+			public const int media_actions = 2131427451;
 			
 			// aapt resource value: 0x7f0b0027
 			public const int middle = 2131427367;
@@ -2137,8 +2170,8 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0011
 			public const int standard = 2131427345;
 			
-			// aapt resource value: 0x7f0b0075
-			public const int status_bar_latest_event_content = 2131427445;
+			// aapt resource value: 0x7f0b007a
+			public const int status_bar_latest_event_content = 2131427450;
 			
 			// aapt resource value: 0x7f0b004a
 			public const int submenuarrow = 2131427402;
@@ -2152,17 +2185,20 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b000d
 			public const int terrain = 2131427341;
 			
-			// aapt resource value: 0x7f0b007d
-			public const int text = 2131427453;
+			// aapt resource value: 0x7f0b0082
+			public const int text = 2131427458;
 			
-			// aapt resource value: 0x7f0b007b
-			public const int text2 = 2131427451;
+			// aapt resource value: 0x7f0b0080
+			public const int text2 = 2131427456;
 			
 			// aapt resource value: 0x7f0b0042
 			public const int textSpacerNoButtons = 2131427394;
 			
-			// aapt resource value: 0x7f0b0079
-			public const int time = 2131427449;
+			// aapt resource value: 0x7f0b006f
+			public const int textView1 = 2131427439;
+			
+			// aapt resource value: 0x7f0b007e
+			public const int time = 2131427454;
 			
 			// aapt resource value: 0x7f0b0038
 			public const int title = 2131427384;
@@ -2374,19 +2410,22 @@ namespace FinalYearProjectApp
 			public const int notification_template_part_time = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int select_dialog_item_material = 2130903080;
+			public const int Register = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int select_dialog_multichoice_material = 2130903081;
+			public const int select_dialog_item_material = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public const int select_dialog_singlechoice_material = 2130903082;
+			public const int select_dialog_multichoice_material = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public const int support_simple_spinner_dropdown_item = 2130903083;
+			public const int select_dialog_singlechoice_material = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public const int UserJobListView = 2130903084;
+			public const int support_simple_spinner_dropdown_item = 2130903084;
+			
+			// aapt resource value: 0x7f03002d
+			public const int UserJobListView = 2130903085;
 			
 			static Layout()
 			{
