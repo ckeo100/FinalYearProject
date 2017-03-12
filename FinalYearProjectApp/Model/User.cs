@@ -41,5 +41,11 @@ namespace FinalYearProjectApp.Model
             //List<User> UserList = new List<User>();
             return UserList;
         }
+
+        public List<Job> ShowUserJobList (string userID)
+        {
+            List<Job> userJobs = new List<Job>();
+            return userJobs;
+        }
     }
 }

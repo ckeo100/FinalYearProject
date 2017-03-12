@@ -41,7 +41,7 @@ namespace FinalYearProjectApp
             
             if ( userModel.user.UserJobIDList != null)
             {
-                userJobs = jobModel.GetJobsFromUserList( userModel.user.UserJobIDList);
+                userJobs = userModel.ShowUserJobList( userModel.user.UserUID.ToString());
             }
 
             userJobListView.Adapter = new JobListAdaptor(this, userJobs);

@@ -191,8 +191,6 @@ namespace FinalYearProjectApp
 
                         jobAds.Add(newJobAd);
 
-
-
                     }
 
                 }
@@ -204,15 +202,9 @@ namespace FinalYearProjectApp
                 gMap.AnimateCamera(CameraUpdateFactory.ZoomTo(15));
             }
 
-            //if (gMap != null)
-            //{
-
-            //}
-
-
         }
 
-        public void onMakerClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
+        public async void onMakerClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
         {
             //throw new NotImplementedException();
             List<JobAd> jobAdList = jobAds;
@@ -221,13 +213,10 @@ namespace FinalYearProjectApp
                 from JobAd in jobAdList
                 where JobAd.jobMarkerID == item.Id
                 select JobAd;
-            Job selectedJob = jobModel.GetJob(selectedJobList.FirstOrDefault().jobAdGUID);
+            Job selectedJob = await jobModel.GetJob(selectedJobList.FirstOrDefault().jobAdGUID);
             var intent = new Intent(this, typeof(JobAdDetails));
             intent.PutExtra("selectedJobGuid", selectedJob.JobUID.ToString());
             StartActivity(intent);
-
-
-
 
         }
 
@@ -256,7 +245,7 @@ namespace FinalYearProjectApp
                     userPostion = new LatLng(latitude, longitude);
 
                     List<Job> jobList = new List<Job>();
-                    jobList = jobModel.GetLocalJobAd(latitude, longitude);
+                    jobList = await jobModel.GetLocalJobAd(latitude, longitude);
 
                     if (jobList != null)
                     {

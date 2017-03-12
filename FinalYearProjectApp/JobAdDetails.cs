@@ -28,10 +28,10 @@ namespace FinalYearProjectApp
         public Button btnAddJobToList;
         public Guid jobGuid;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.JobDetails);
+            SetContentView(Resource.Layout.JobAdDetails);
             txvJobLabel = FindViewById<TextView>(Resource.Id.lblJobName);
             txvEmploymentTypeText = FindViewById<TextView>(Resource.Id.txvEmploymentType);
             txvSalaryText = FindViewById<TextView>(Resource.Id.txvSalary);
@@ -40,8 +40,8 @@ namespace FinalYearProjectApp
             txvJobDescriptionText = FindViewById<TextView>(Resource.Id.txvJobDescription);
             btnAddJobToList = FindViewById<Button>(Resource.Id.btnAddJobList);
             string jobString = Intent.Extras.GetString("selectedJobGuid");
-        
-            jobItem = jobModel.GetJob(jobString);
+
+            jobItem = await jobModel.GetJob(jobString);
 
             txvJobLabel.Text = jobItem.JobName;
             txvEmploymentTypeText.Text += jobItem.JobEmploymentType;

@@ -29,7 +29,7 @@ namespace FinalYearProjectApp
         public TextView txvJobDescriptionText;
         public Guid jobGuid;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.JobAdDetails);
@@ -41,7 +41,7 @@ namespace FinalYearProjectApp
             txvJobDescriptionText = FindViewById<TextView>(Resource.Id.txvJobDescription);
             string jobString = Intent.Extras.GetString("selectedJobGuid");
             //jobGuid = Guid.Parse(jobGuidString);
-            jobItem = jobModel.GetJob(jobString);
+            jobItem = await jobModel.GetJob(jobString);
 
             txvJobLabel.Text = jobItem.JobName;
             txvEmploymentTypeText.Text += jobItem.JobEmploymentType;

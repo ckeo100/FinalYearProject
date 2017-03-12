@@ -30,10 +30,12 @@ namespace FinalYearProjectApp.Model
 {
     public class Id
     {
-
+        [JsonProperty(PropertyName = "$oid")]
+        public string oid { get; set; }
     }
     public class Job
     {
+        //public Id _id { get; set; }
         public string JobUID { get; set; }
         public string EmployeeUID { get; set; }
         public string JobName { get; set; }
@@ -50,48 +52,52 @@ namespace FinalYearProjectApp.Model
         public string RecruiterEmail { get; set; }
 
     }
-    public class JobModel
+
+    
+        public class JobModel
     {
-        public async Task<List<Job>> DownloadDataAsync()
+        public async Task<JsonValue> DownloadDataAsync( string url)
         {
-            string url = UrlBuilder.getJobApi();
+            //Get data from webservice
+            
+            HttpWebRequest request = HttpWebRequest.CreateHttp(new Uri(url));
+            request.ContentType = "application/json";
+            request.Method = "GET";
 
-            var httpClient = new HttpClient();
-            var downloadTask = httpClient.GetStringAsync(url);//.ConfigureAwait(continueOnCapturedContext: false);
-            string content = await downloadTask;
-            List<Job> jobList= new List<Job>();
-            jobList = JsonConvert.DeserializeObject<List<Job>>(content);
-            return jobList;
-            //JavaScriptSerializer serializer = new JavaScriptSerializer();
+            //send of a request for data from mlab
+            using (WebResponse response = await request.GetResponseAsync())
+            {
+                //get a stream of data
+                using (Stream stream = response.GetResponseStream())
+                {
+                    //turn the stream data into jsondata
+                    JsonValue resultantJson = await Task.Run(() => JsonObject.Load(stream));
 
-
-            //var result = JsonConvert.DeserializeObject<RootObject>(content);
-            //JsonValue jsonValue = JsonValue.Parse(content);
-            //JsonObject jsonObject = jsonValue as JsonObject;
-            //IList<JsonToken> tokenList = jsonObject.Select(JsonConvert.DeserializeObject<T>).ToList();
-            //return content;
-            //Console.Out.WriteLine("Response: \r\n {0}", content);
+                    return resultantJson;
+                }
+            }
+           
         }
 
         MathService mathService = new MathService();
-        public List<Job> ShowAllJobs()
+        public async Task<List<Job>> ShowAllJobs()
         {
-            //IMongoCollection<Job> jobColl = MongoConnection();
-            //var jobQuery = from j in jobColl.AsQueryable<Job>()
-            //               select j;//jobColl.Find(_ => true).ToList();//jobTempRespository.GetAllJobs();
+            string builtUrl = UrlBuilder.getJobApi();
+            JsonValue json = await DownloadDataAsync(builtUrl);
             List<Job> jobList = new List<Job>();
-            //foreach (Job j in jobQuery)
-            //{
-            //    jobList.Add(j);
-            //}
+
             return jobList;
         }
 
-        public Job GetJob(string JobID)
+        public async Task<Job> GetJob(string JobID)
         {
-            //IMongoCollection<Job> jobColl = MongoConnection();
-            //var selectedJob = jobColl.Find(j => j.JobID == JobID).ToList().FirstOrDefault();
-            Job selectedJob = new Job();
+           
+            string builtUrl = UrlBuilder.getJobSingle(JobID);
+            HttpDataHandler http = new HttpDataHandler();
+            string stream = http.GetHTTPData(builtUrl);
+            //JsonValue json = await DownloadDataAsync(builtUrl);
+            Job selectedJob = JsonConvert.DeserializeObject<List<Job>>(stream).FirstOrDefault();
+           
             return selectedJob;
         }
         public List<Job> GetJobsGeoLocation(double Latitude, double Longitude)
@@ -100,24 +106,9 @@ namespace FinalYearProjectApp.Model
             return Jobs;
         }
 
-        public List<Job> GetJobsFromUserList(List<string> userJobIdList)
-        {
-            //IMongoCollection<Job> jobColl = MongoConnection();
-            List<Job> FullJobs = ShowAllJobs();
-            List<Job> userJobList = new List<Job>();
-            //foreach String Id in userJobIdList
-            //Job jobItem = FullJobs.Find(j => string.Equals(j.JobID, Id)//jobColl.Find(j => string.Equals(j.JobID, Id)).FirstOrDefault();
-            //UserJobList = jobColl.Find(j => )
-            foreach (string Id in userJobIdList)
-            {
-                userJobList.Add(GetJob(Id));
-            }
-            return userJobList;
-           
-        
-        }
 
-        public List<Job> GetLocalJobAd(double currentLatitude, double currentLongitude)
+
+        public async Task<List<Job>> GetLocalJobAd(double currentLatitude, double currentLongitude)
         {
             //IMongoCollection<Job> jobColl = MongoConnection();
             //radius of the search criteria circle  
@@ -126,9 +117,10 @@ namespace FinalYearProjectApp.Model
             //HttpDataHandler http = new HttpDataHandler();
 
             //string stream = http.GetHTTPData(url);
-            List<Job> list = DownloadDataAsync().Result;//JsonConvert.DeserializeObject<List<Job>>(stream);
-            //var jsonList = getData.jobList;//GetData(); //GetJsonAsync(UrlBuilder.getJobApi()).Result;
-            //var jobList = JsonConvert.DeserializeObject<List<Job>>(jsonList.ToString());
+            JsonValue json = await DownloadDataAsync(url);
+            string jsonString = json.ToString();
+            var jobArray = JsonConvert.DeserializeObject<Job[]>(jsonString);
+
             double searchDistanceInKM = 8;
             //radius of earth
             double radiusOfTheEarthInKm = 6371;
@@ -138,29 +130,21 @@ namespace FinalYearProjectApp.Model
             double minLat = currentLatitudeRad - mathService.ConvertRadianToDegree(searchDistanceInKM / radiusOfTheEarthInKm);
             double maxLong = currentLongitudeRad + mathService.ConvertRadianToDegree(System.Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / System.Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
             double minLong = currentLongitudeRad - mathService.ConvertRadianToDegree(System.Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / System.Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
-            
 
-            //List<Job> fullJobList = ShowAllJobs();
 
-            //var searchCriteriaJobs = jobColl.Find(j => j.JobAddress.Latitiude >= minLat 
-            //&& j.JobAddress.Latitiude <= maxLat
-            //&& j.JobAddress.Longitude >= minLong
-            //&& j.JobAddress.Longitude <= maxLong
-            //).ToList();
+            List<Job> fullJobList = jobArray.ToList();
 
-            //return searchCriteriaJobs.ToList();
-            List<Job> searchCriteriaJobs = list.Where(j => j.JobAddress.Latitiude >= minLat
+
+            List<Job> searchCriteriaJobs = fullJobList.Where(j => j.JobAddress.Latitiude >= minLat
            && j.JobAddress.Latitiude <= maxLat
            && j.JobAddress.Longitude >= minLong
-           && j.JobAddress.Longitude <= maxLong).ToList();//.SelectMany(j => j.JobAddress.Latitiude >= minLat
-           //&& j.JobAddress.Latitiude <= maxLat
-           //&& j.JobAddress.Longitude >= minLong
-           //&& j.JobAddress.Longitude <= maxLong).ToList();//retrievedJobList.Find(j => j.JobAddress.Latitiude >= minLat
-            //&& j.JobAddress.Latitiude <= maxLat
-            //&& j.JobAddress.Longitude >= minLong
-            //&& j.JobAddress.Longitude <= maxLong)//.ToList();
-
+           && j.JobAddress.Longitude <= maxLong).ToList();
             return searchCriteriaJobs;
+        }
+
+        private object DownloadDataAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
