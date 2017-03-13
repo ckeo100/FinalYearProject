@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using SQLite;
 using FinalYearProjectApp.Model;
+using FinalYearProjectApp.AppServices;
 
 namespace FinalYearProjectApp
 {
@@ -21,6 +22,9 @@ namespace FinalYearProjectApp
         EditText edtPassword;
         Button btnLogin;
         Button btnRegister;
+        UserModel usermodel = new UserModel();
+        SqlDataHandler sqlhandler = new SqlDataHandler();
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -32,6 +36,7 @@ namespace FinalYearProjectApp
             btnRegister = FindViewById<Button>(Resource.Id.btnRegister);
             btnLogin.Click += btnLogin_Click;
             btnRegister.Click += btnRegister_Click;
+            checkedIfTableExsists();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -43,12 +48,8 @@ namespace FinalYearProjectApp
         {
             try
             {
-                String path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-                var db = new SQLiteConnection(System.IO.Path.Combine(path, "user.db"));
-                var data = db.Table<User>();
-                var data1 = data.Where(x => x.UserEmail == edtEmailAddress.Text && x.Password == edtPassword.Text).FirstOrDefault();
-
-                if (data1 != null)
+                var userData = usermodel.showUserByCredentials(edtEmailAddress.Text, edtPassword.Text);
+                if (userData != null)
                 {
                     StartActivity(typeof(MainActivity));
                 }
@@ -62,15 +63,14 @@ namespace FinalYearProjectApp
                 Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
             }
         }
-        private string CreateDB()
-        {
-            var output = "";
-            output += "Creating Database if it dosen't exsist";
-            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-            var db = new SQLiteConnection(System.IO.Path.Combine(path, "user.db"));
-            output += "\b Database Created...";
-            return output;
 
+        private void checkedIfTableExsists()
+        {
+            bool doesExsists = sqlhandler.checkIfTableExsists();
+            if (doesExsists == false)
+            {
+                sqlhandler.createDB();
+            }
         }
     }
 }

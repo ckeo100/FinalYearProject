@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adaptors\JobListAdaptor.cs" />
+    <Compile Include="AppServices\SqlDataHandler.cs" />
     <Compile Include="AppServices\UrlBuilder.cs" />
     <Compile Include="AppServices\HttpDataHandler.cs" />
     <Compile Include="AppServices\LocationManagerService.cs" />

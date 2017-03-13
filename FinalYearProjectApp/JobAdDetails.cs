@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 //using FinalYearProjectClassLibrary.Model;
 using FinalYearProjectApp.Model;
+using SQLite;
 
 namespace FinalYearProjectApp
 {
@@ -27,6 +28,7 @@ namespace FinalYearProjectApp
         public TextView txvJobDescriptionText;
         public Button btnAddJobToList;
         public Guid jobGuid;
+        string jobString; //= Intent.Extras.GetString("selectedJobGuid");
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -39,8 +41,8 @@ namespace FinalYearProjectApp
             txvAddtionalQualificationsAndSkillsText = FindViewById<TextView>(Resource.Id.txvAdditionalQualifictionAndSkills);
             txvJobDescriptionText = FindViewById<TextView>(Resource.Id.txvJobDescription);
             btnAddJobToList = FindViewById<Button>(Resource.Id.btnAddJobList);
-            string jobString = Intent.Extras.GetString("selectedJobGuid");
 
+            jobString = Intent.Extras.GetString("selectedJobGuid");
             jobItem = await jobModel.GetJob(jobString);
 
             txvJobLabel.Text = jobItem.JobName;
@@ -66,7 +68,37 @@ namespace FinalYearProjectApp
 
         private void addToListButton_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            try
+            {
+                String path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+                var db = new SQLiteConnection(System.IO.Path.Combine(path, "user.db"));
+                var userDataTable = db.Table<User>();
+                var user = userDataTable.FirstOrDefault();
+
+                if (user != null)
+                {
+                    bool containsJobID = user.UserJobIDList.Any(idData => idData == jobString);
+
+                    if (containsJobID ==  true)
+                    {
+                        Toast.MakeText(this, "You already have this job in your list", ToastLength.Short).Show();
+                    }
+                    else
+                    {
+                        user.UserJobIDList.Add(jobString);
+                        StartActivity(typeof(Map));
+                    }
+                   
+                }
+                else
+                {
+                    Toast.MakeText(this, "There is a issues wil you user details", ToastLength.Short).Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
+            }
 
 
         }
