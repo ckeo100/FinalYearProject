@@ -85,7 +85,7 @@ namespace FinalYearProjectApp
                     }
                     else
                     {
-                        userModel.addToUserJobList(user.UserUID, jobString, jobItem.JobName);
+                        userModel.addToUserJobList(user.UserUID, jobString, jobItem.JobName,jobItem.RecruiterContactDetails);
                         StartActivity(typeof(Map));
                     }
                    

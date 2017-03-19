@@ -115,11 +115,11 @@ namespace FinalYearProjectApp.AppServices
 
         }
 
-        //public void resetNewJobListDB()
-        //{
-        //    var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db"));
-        //    connnection.DropTable<UserPotentialJob>();
-        //}
+        public void resetNewJobListDB()
+        {
+            var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db"));
+            connnection.DropTable<UserPotentialJob>();
+        }
 
 
     }

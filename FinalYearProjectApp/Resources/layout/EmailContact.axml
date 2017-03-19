@@ -41,7 +41,7 @@
         android:id="@+id/textView1" />
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="256.5dp"
+        android:layout_height="197.5dp"
         android:id="@+id/edtBodyText" />
     <Button
         android:text="Send Email"

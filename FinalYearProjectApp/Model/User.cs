@@ -41,6 +41,7 @@ namespace FinalYearProjectApp.Model
         public Guid userUID { get; set; }
         public string jobGuid { get; set; }
         public string jobName { get; set; }
+        public string jobContactDetails { get; set; }
         //public object JobUID { get; internal set; }
 
         public static implicit operator UserPotentialJob(Job v)
@@ -190,7 +191,7 @@ namespace FinalYearProjectApp.Model
             //return userJobs;
         }
 
-        public void addToUserJobList(Guid UserGuid, string jobID, string jobName)
+        public void addToUserJobList(Guid UserGuid, string jobID, string jobName, string contactDetails)
         {
             try
             {

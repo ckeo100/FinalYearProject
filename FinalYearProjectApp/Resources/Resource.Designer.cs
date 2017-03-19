@@ -1968,6 +1968,9 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0069
 			public const int btnSendEmail = 2131427433;
 			
+			// aapt resource value: 0x7f0b009f
+			public const int btnSendListToEmail = 2131427487;
+			
 			// aapt resource value: 0x7f0b007e
 			public const int btnToMapView = 2131427454;
 			
