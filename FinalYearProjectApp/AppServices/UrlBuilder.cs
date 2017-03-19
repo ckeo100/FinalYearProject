@@ -22,7 +22,7 @@ namespace FinalYearProjectApp.AppServices
         {
             String baseUrl = $"https://api.mlab.com/api/1/databases/{DB_NAME}/collections/{COLLECTION_NAME}";
             StringBuilder strBuilder = new StringBuilder(baseUrl);
-            strBuilder.Append("?={\"JobUID\":" + id + "}?apiKey=" + API_KEY);
+            strBuilder.Append("?q={\"JobUID\":\"" + id + "\"}&apiKey=" + API_KEY);
             return strBuilder.ToString();
         }
 
@@ -33,6 +33,7 @@ namespace FinalYearProjectApp.AppServices
             strBuilder.Append("?apiKey=" + API_KEY);
             return strBuilder.ToString();
         }
+        
 
     }
 }

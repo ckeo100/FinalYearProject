@@ -13,7 +13,7 @@ using Android.Content;
 
 namespace FinalYearProjectApp
 {
-    [Activity(Label = "MainMenu", Icon = "@drawable/icon")]
+    [Activity(Label = "MainMenu", Icon = "@drawable/icon", MainLauncher = true)]
     public class MainActivity : Activity
     {
         public Button btnUserLocation;

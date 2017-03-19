@@ -22,7 +22,7 @@ namespace FinalYearProjectApp
     public class UserJobListActivity : Activity
     {
         private ListView userJobListView;
-        private List<Job> userJobs;
+        private List<UserPotentialJob> userJobs;
         private FinalYearProjectClassLibrary.Controllers.UserController userManager;
         //private JobsTempRepository jobTempRepository;
         private JobModel jobModel;
@@ -36,13 +36,20 @@ namespace FinalYearProjectApp
             userJobListView = FindViewById<ListView>(Resource.Id.LTVUserJobs);
             userModel = new UserModel();
             userManager = new FinalYearProjectClassLibrary.Controllers.UserController();
+            var currentUser = userModel.getCurrentUser();
             //jobTempRepository = new JobsTempRepository();
-            List<Job> userJobs = new List<Job>();//userModel.user.UserJobList;//userManager.ShowUsersJobList();
+            //userModel.ShowUserJobList()
+            List<UserPotentialJob> cureentUserPotetnialJobList = new List<UserPotentialJob>();
+            userJobs = userModel.ShowUserJobList(currentUser.UserUID);//new List<Job>();//userModel.user.UserJobList;//userManager.ShowUsersJobList();
             
-            if ( userModel.user.UserJobIDList != null)
-            {
-                userJobs = userModel.ShowUserJobList( userModel.user.UserUID.ToString());
-            }
+            //if ( currentUser.UserUID != null)
+            //{
+            //    cureentUserPotetnialJobList = userModel.ShowUserJobList( currentUser.UserUID);
+            //    foreach (UserPotentialJob potentialJob in cureentUserPotetnialJobList)
+            //    {
+            //        Job newJob = jobModel.GetJob(potentialJob.jobGuid).Result;
+            //    }
+            //}
 
             userJobListView.Adapter = new JobListAdaptor(this, userJobs);
             userJobListView.FastScrollEnabled = true;
@@ -53,11 +60,11 @@ namespace FinalYearProjectApp
         private void userJobListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
 
-            var job = userJobs[e.Position];
+            UserPotentialJob job = userJobs[e.Position];
 
             var intent = new Intent();
             intent.SetClass(this, typeof(JobDetailsActivity));
-            intent.PutExtra("selectedJobGuid", job.JobUID.ToString());
+            intent.PutExtra("selectedJobGuid", job.jobGuid.ToString());
 
             StartActivityForResult(intent, 100);
            

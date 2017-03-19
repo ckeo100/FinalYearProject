@@ -1,23 +1,22 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 //using FinalYearProjectClassLibrary.Model;
 using FinalYearProjectApp.Model;
 using SQLite;
+using System.Collections.Generic;
 
 namespace FinalYearProjectApp
 {
     [Activity(Label = "JobAdDetails")]
     public class JobAdDetails : Activity
     {
+        UserModel userModel = new UserModel();
         JobModel jobModel = new JobModel();
         Job jobItem = new Job();
         public TextView txvJobLabel;
@@ -73,11 +72,12 @@ namespace FinalYearProjectApp
                 String path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
                 var db = new SQLiteConnection(System.IO.Path.Combine(path, "user.db"));
                 var userDataTable = db.Table<User>();
-                var user = userDataTable.FirstOrDefault();
+                var user = userModel.getCurrentUser();//userDataTable.FirstOrDefault();
 
                 if (user != null)
                 {
-                    bool containsJobID = user.UserJobIDList.Any(idData => idData == jobString);
+                    List<UserPotentialJob> userJobList = userModel.ShowUserJobList(user.UserUID);
+                    bool containsJobID = userJobList.Any(x => x.jobGuid == jobString);//user.UserJobIDList.Any(idData => idData == jobString);
 
                     if (containsJobID ==  true)
                     {
@@ -85,7 +85,7 @@ namespace FinalYearProjectApp
                     }
                     else
                     {
-                        user.UserJobIDList.Add(jobString);
+                        userModel.addToUserJobList(user.UserUID, jobString, jobItem.JobName);
                         StartActivity(typeof(Map));
                     }
                    

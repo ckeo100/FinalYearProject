@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 
 using Android.App;
 using Android.Content;
@@ -27,7 +28,8 @@ namespace FinalYearProjectApp.AppServices
         {
             try
             {
-                Java.Net.URL url = new URL(urlString);
+                //stream = null;
+                URL url = new URL(urlString);
                 HttpURLConnection urlConnection = (HttpURLConnection)url.OpenConnection();
 
                 if(urlConnection.ResponseCode == HttpStatus.Ok)
@@ -42,7 +44,11 @@ namespace FinalYearProjectApp.AppServices
                 }
 
             }
-            catch(Exception ex) { }
+            catch(Exception ex)
+            {
+                string error = ex.ToString();
+                System.Diagnostics.Debug.WriteLine(error);
+            }
             return stream;
         }
 

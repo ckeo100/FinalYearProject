@@ -1,34 +1,28 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using SQLite;
 using Android.Util;
 using FinalYearProjectApp.Model;
+
+using SQLite;
 
 namespace FinalYearProjectApp.AppServices
 {
     class SqlDataHandler
     {
-        string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+        public string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+        //string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
 
         public string getSqliteFolderLocation()
         {
-            return folder;
+            //path// += "/.config";
+            return path; //+= "/.config"; ;
         }
 
-        public bool checkIfTableExsists()
+        public bool checkIfUserTableExsists()
         {
             try
             {
-                using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "user.db")))
+                //string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(path, "user.db")))
                 {
                     var userTable = connection.Table<User>();
                     var userdata = userTable.FirstOrDefault();
@@ -52,11 +46,41 @@ namespace FinalYearProjectApp.AppServices
 
         }
 
-        public bool createDB()
+        public bool checkIfJobTableExsists()
         {
             try
             {
-                using (var connnection = new SQLiteConnection(System.IO.Path.Combine(folder, "user.db")))
+                //string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db")))
+                {
+                    var JobListTable = connection.Table<UserPotentialJob>();
+                    var JobListdata = JobListTable.FirstOrDefault();
+                    if (JobListdata != null)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+
+                        return false;
+                    }
+
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("There is a SQLite Exception", ex.Message);
+                return false;
+            }
+
+        }
+
+        public bool createUserDB()
+        {
+            try
+            {
+                //string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                using (var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "user.db")))
                 {
                     connnection.CreateTable<User>();
                     return true;
@@ -71,6 +95,32 @@ namespace FinalYearProjectApp.AppServices
             
         }
 
-        
+        public bool createJobListDB()
+        {
+            try
+            {
+                //string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                using (var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db")))
+                {
+                    connnection.CreateTable<UserPotentialJob>();
+                    return true;
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("There is a SQLite Exception", ex.Message);
+                return false;
+            }
+
+
+        }
+
+        //public void resetNewJobListDB()
+        //{
+        //    var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db"));
+        //    connnection.DropTable<UserPotentialJob>();
+        //}
+
+
     }
 }

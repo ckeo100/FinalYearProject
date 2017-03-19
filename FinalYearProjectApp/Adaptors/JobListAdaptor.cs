@@ -15,12 +15,12 @@ using FinalYearProjectApp.Model;
 
 namespace FinalYearProjectApp.Adaptors
 {
-    public class JobListAdaptor: BaseAdapter<Job>
+    public class JobListAdaptor: BaseAdapter<UserPotentialJob>
     {
-        List<Job> items;
+        List<UserPotentialJob> items;
         Activity context;
 
-        public JobListAdaptor(Activity context, List<Job> items) : base()
+        public JobListAdaptor(Activity context, List<UserPotentialJob> items) : base()
         {
             this.context = context;
             this.items = items;
@@ -32,7 +32,7 @@ namespace FinalYearProjectApp.Adaptors
             //throw new NotImplementedException();
         }
 
-        public override Job this[int position]
+        public override UserPotentialJob this[int position]
         {
             get
             {
@@ -63,7 +63,7 @@ namespace FinalYearProjectApp.Adaptors
                 convertView = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItem1, null);
             }
             //assigns the row text to the text of the current item jobName
-            convertView.FindViewById<TextView>(Android.Resource.Id.Text1).Text = item.JobName;
+            convertView.FindViewById<TextView>(Android.Resource.Id.Text1).Text = item.jobName;
             //convertView.FindViewById<TextView>(Android.Resource.).Text = item.JobID.ToString();
             return convertView;
         }

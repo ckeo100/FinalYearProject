@@ -72,11 +72,11 @@ namespace FinalYearProjectApp
                     //string dpPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "user.db3");
                     //create a new instance of a db using the dpPath
                     //var db = new SQLiteConnection(dpPath);
-                    string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+                    string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                     var db = new SQLiteConnection(System.IO.Path.Combine(path, "user.db"));
                     PrintFolderPath(path);
                     //create a new table using the "LoginTable" object
-                    db.CreateTable<User>();
+                    //db.CreateTable<User>();
                     // create a new instance of a "loginTable"
 
                     //message += path;
@@ -94,11 +94,14 @@ namespace FinalYearProjectApp
                     {
                         User newUser = new User();
                         // assign the property names with the values from the text fields
+                        newUser.UserUID = new Guid();
                         newUser.FirstName = edtFirstName.Text;//edtFirstName.Text;
                         newUser.SureName = edtLastName.Text;
                         newUser.UserEmail = edtEmail.Text;
                         newUser.Password = edtConfirmPassword.Text;
                         //insert the table into the db
+                        db.DeleteAll<User>();
+                        
                         db.Insert(newUser);
                         string message = "Record Added Successfully at path";
                         Toast.MakeText(this, message, ToastLength.Short).Show();

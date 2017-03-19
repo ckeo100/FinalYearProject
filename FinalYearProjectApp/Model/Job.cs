@@ -49,7 +49,16 @@ namespace FinalYearProjectApp.Model
         public double JobSalaryMax { get; set; }
         public string JobDescription { get; set; }
         public Address JobAddress { get; set; }
-        public string RecruiterEmail { get; set; }
+        public string RecruiterContactDetails { get; set; }
+
+        //public Job()
+        //{
+        //    this.JobUID = Guid.Empty.ToString();
+        //    this.EmployeeUID = Guid.Empty.ToString();
+        //    this.JobName = "Job Name";
+        //    new List<string> = new List<>(new int[] { 2, 3, 7 });
+        //    this.JobTags = 
+        //}
 
     }
 
@@ -84,9 +93,11 @@ namespace FinalYearProjectApp.Model
         {
             string builtUrl = UrlBuilder.getJobApi();
             JsonValue json = await DownloadDataAsync(builtUrl);
+            string jsonString = json.ToString();
+            var jobArray = JsonConvert.DeserializeObject<Job[]>(jsonString);
             List<Job> jobList = new List<Job>();
 
-            return jobList;
+            return jobList = jobArray.ToList();
         }
 
         public async Task<Job> GetJob(string JobID)
@@ -106,7 +117,23 @@ namespace FinalYearProjectApp.Model
             return Jobs;
         }
 
+        public async Task<List<Job>> GetPotentialUserJobs(List<UserPotentialJob> potentialJobList)
+        {
+            List<Job> jobList = await ShowAllJobs();
+            foreach( UserPotentialJob job in potentialJobList)
+            {
+                Job newJob = jobList.Where(j => j.JobUID == job.jobGuid).FirstOrDefault();
+                jobList.Add(newJob);
+            }
+            return jobList;
+            
+        }
 
+        //public List<Job> getJobsByList(List<UserPotentialJob> userPotentialJobList)
+        //{
+        //    List<Job> newJobList = new List<Job>();
+        //    foreach potentialJobIn
+        //}
 
         public async Task<List<Job>> GetLocalJobAd(double currentLatitude, double currentLongitude)
         {
@@ -115,13 +142,14 @@ namespace FinalYearProjectApp.Model
             string url = UrlBuilder.getJobApi();
             //JobModel.GetData getData = new GetData();
             //HttpDataHandler http = new HttpDataHandler();
-
+            string stream = null;
+            HttpDataHandler http = new HttpDataHandler();
+            stream = http.GetHTTPData(url);
             //string stream = http.GetHTTPData(url);
-            JsonValue json = await DownloadDataAsync(url);
-            string jsonString = json.ToString();
-            var jobArray = JsonConvert.DeserializeObject<Job[]>(jsonString);
+            
+            var jobArray = JsonConvert.DeserializeObject<List<Job>>(stream);
 
-            double searchDistanceInKM = 8;
+            double searchDistanceInKM = 1;
             //radius of earth
             double radiusOfTheEarthInKm = 6371;
             double currentLatitudeRad = currentLatitude;
@@ -141,6 +169,8 @@ namespace FinalYearProjectApp.Model
            && j.JobAddress.Longitude <= maxLong).ToList();
             return searchCriteriaJobs;
         }
+
+        
 
         private object DownloadDataAsync()
         {

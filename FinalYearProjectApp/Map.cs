@@ -83,15 +83,14 @@ namespace FinalYearProjectApp
                 string urlString = @params[0];
 
                 HttpDataHandler http = new HttpDataHandler();
+                //stream = http.GetHTTPData(UrlBuilder.getJobApi());
                 stream = http.GetHTTPData(urlString);
                 return stream;
             }
             protected override void OnPostExecute(string result)
             {
                 base.OnPostExecute(result);
-
-                
-                activity.jobList = JsonConvert.DeserializeObject<List<Job>>(result);
+                //activity.jobList = JsonConvert.DeserializeObject<List<Job>>(result);
                 activity.SetUpMap();
                 pd.Dismiss();
                 //return list;
@@ -163,6 +162,8 @@ namespace FinalYearProjectApp
                 latitude = currentLocation.Latitude;
                 longitude = currentLocation.Longitude;
                 userPostion = new LatLng(latitude, longitude);
+
+                jobList = jobModel.GetLocalJobAd(latitude, longitude).Result;
                 //new GetData(this).Execute(UrlBuilder.getJobApi());
                 //List<Job> jobList = new List<Job>();
                 //CurrentJobList = DownloadDataAsync().Result;//jobModel.GetLocalJobAd(latitude, longitude);
@@ -236,10 +237,11 @@ namespace FinalYearProjectApp
 
                 Criteria criteria = new Criteria();
                 //LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-                string provider = locationManager.GetBestProvider(criteria, false);
-                if (locationManager.GetLastKnownLocation(provider) != null)
+                //string provider = locationManager.GetBestProvider(criteria, false);
+                Location testCurrentLocation = getLastKnownLocation();
+                if (testCurrentLocation != null)
                 {
-                    Location currentLocation = locationManager.GetLastKnownLocation(provider);
+                    Location currentLocation = testCurrentLocation;
                     latitude = currentLocation.Latitude;
                     longitude = currentLocation.Longitude;
                     userPostion = new LatLng(latitude, longitude);
