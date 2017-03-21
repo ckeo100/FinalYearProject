@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace FinalYearProjectApp
 {
-    [Activity(Label = "LocationTracker")]
+    [Activity()]
     public class LocationTracker : Activity, ILocationListener
     {
         static readonly string TAG = "X:" + typeof(MainActivity).Name;

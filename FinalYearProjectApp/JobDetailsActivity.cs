@@ -15,11 +15,12 @@ using FinalYearProjectApp.Model;
 using Android.Views;
 using FinalYearProjectApp.AppServices;
 using Newtonsoft.Json;
+using Android.Text;
 
 namespace FinalYearProjectApp
 {
     
-    [Activity(Label = "JobDetailsActivity")]
+    [Activity()]
     public class JobDetailsActivity : Activity
     {
         JobModel jobModel = new JobModel();
@@ -122,16 +123,26 @@ namespace FinalYearProjectApp
                 activity.txvEmploymentTypeText.Text += activity.jobItem.JobEmploymentType;
                 string completeSalary = string.Format("{0}-{1} per {2}", activity.jobItem.JobSalaryMin, activity.jobItem.JobSalaryMax, activity.jobItem.JobSalaryRate);
                 activity.txvSalaryText.Text += completeSalary;
+                string JobBasicQualificationString = "<body> </br> ";
+                string JobAdditionalSkillsAndQaulificationsString = "<body> <br /> ";
                 foreach (string skill in activity.jobItem.JobBasicQualification)
                 {
-                    activity.txvRequiredQualificationsAndSkillsText.Text += string.Format(">{0}\n", skill);
+
+                    JobBasicQualificationString += "&#8226;" + skill + "<br />";
+                    //activity.txvRequiredQualificationsAndSkillsText.SetText(JobBasicQualificationString.ToCharArray(), 0, JobBasicQualificationString.ToCharArray().Length);// += string.Format(@"\u2022 {0}\n", skill);
                 }
+                JobBasicQualificationString += "</body>";
+                activity.txvRequiredQualificationsAndSkillsText.TextFormatted = Html.FromHtml(JobBasicQualificationString); //.SetText(JobBasicQualificationString.ToCharArray(), 0, JobBasicQualificationString.ToCharArray().Length);
                 foreach (string skill in activity.jobItem.JobAdditionalSkillsAndQaulifications)
                 {
-                    activity.txvAddtionalQualificationsAndSkillsText.Text += string.Format(">{0}\n", skill);
+                    JobAdditionalSkillsAndQaulificationsString += "&#8226;" + skill + "<br />";
+                    //activity.txvAddtionalQualificationsAndSkillsText.Text += string.Format(@"\u2022 {0}\n", skill);
                 }
+                JobAdditionalSkillsAndQaulificationsString += "</body>";
+                activity.txvAddtionalQualificationsAndSkillsText.TextFormatted = Html.FromHtml(JobAdditionalSkillsAndQaulificationsString);//SetText( JobAdditionalSkillsAndQaulificationsString.ToCharArray(), 0, JobAdditionalSkillsAndQaulificationsString.ToCharArray().Length);
+                //Android.Text.FromHtmlOptions.
 
-                activity.txvJobDescriptionText.Text += activity.jobItem.JobDescription;
+
                 activity.isContactDetailEmail = activity.contactHandler.IsContactEmailAddress(activity.jobItem.RecruiterContactDetails);
                 if (activity.isContactDetailEmail == true)
                 {

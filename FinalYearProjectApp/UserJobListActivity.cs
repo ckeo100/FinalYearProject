@@ -135,7 +135,8 @@ namespace FinalYearProjectApp
                 User userDetails = usermodel.getCurrentUser();
                 foreach(UserPotentialJob jobAd in activity.userJobs)
                 {
-                    newJobList = jobList.Where(x => x.JobUID == jobAd.jobGuid).ToList();
+                    Job newJob = jobList.Where(x => x.JobUID == jobAd.jobGuid).FirstOrDefault();
+                    newJobList.Add( newJob);
                 }
                 //List<Job> userJobList = jobList.Where(x => x.JobUID;//.Where<>;
                 StringBuilder sb = new StringBuilder();

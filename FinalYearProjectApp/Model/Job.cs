@@ -135,7 +135,7 @@ namespace FinalYearProjectApp.Model
         //    foreach potentialJobIn
         //}
 
-        public async Task<List<Job>> GetLocalJobAd(double currentLatitude, double currentLongitude)
+        public async Task<List<Job>> GetLocalJobAd(List<Job> jobList,double currentLatitude, double currentLongitude)
         {
             //IMongoCollection<Job> jobColl = MongoConnection();
             //radius of the search criteria circle  
@@ -146,8 +146,8 @@ namespace FinalYearProjectApp.Model
             HttpDataHandler http = new HttpDataHandler();
             stream = http.GetHTTPData(url);
             //string stream = http.GetHTTPData(url);
-            
-            var jobArray = JsonConvert.DeserializeObject<List<Job>>(stream);
+
+            var jobArray = jobList.ToArray();//JsonConvert.DeserializeObject<List<Job>>(stream);
 
             double searchDistanceInKM = 1;
             //radius of earth

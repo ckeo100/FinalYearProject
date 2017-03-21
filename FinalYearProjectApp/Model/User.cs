@@ -37,8 +37,9 @@ namespace FinalYearProjectApp.Model
 
     public class UserPotentialJob 
     {
-        [PrimaryKey]
+        
         public Guid userUID { get; set; }
+        [PrimaryKey]
         public string jobGuid { get; set; }
         public string jobName { get; set; }
         public string jobContactDetails { get; set; }
@@ -139,32 +140,6 @@ namespace FinalYearProjectApp.Model
                 User emptyUser = new User();
                 return user;
             }
-            //try
-            //{
-            //    string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            //    folder += "/.config";
-            //    using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "user.db")))
-            //    {
-            //        var userTable = connection.Table<User>();
-            //        var userdata = userTable.Where(x => x.UserEmail == userEmail && x.Password == userPassword);
-            //        if (userdata != null)
-            //        {
-            //            User user = userdata.FirstOrDefault();
-            //            return user;
-            //        }
-            //        else
-            //        {
-            //            User emptyUser = new User();
-            //            return user;
-            //        }
-            //    }
-            //}
-            //catch (SQLiteException ex)
-            //{
-            //    Log.Info("There is a SQLite Exception", ex.Message);
-            //    User emptyUser = new User();
-            //    return emptyUser;
-            //}
 
         }
 
@@ -203,6 +178,7 @@ namespace FinalYearProjectApp.Model
                 newPotentialJob.userUID = UserGuid;
                 newPotentialJob.jobGuid = jobID;
                 newPotentialJob.jobName = jobName;
+                newPotentialJob.jobContactDetails = contactDetails;
                 db.Insert(newPotentialJob);
                 
 

@@ -7,7 +7,7 @@
 	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW" />
-	<application android:label="FinalYearProjectApp">
+	<application android:label="EmployWhere">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAcqAfxfo6d1BusidCxAq2FYEvFHG1S1ZA" />
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 	</application>

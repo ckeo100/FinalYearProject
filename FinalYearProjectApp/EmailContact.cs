@@ -13,7 +13,7 @@ using FinalYearProjectApp.Model;
 
 namespace FinalYearProjectApp
 {
-    [Activity(Label = "EmailContact")]
+    [Activity()]
     public class EmailContact : Activity
     {
         public UserModel userModel;

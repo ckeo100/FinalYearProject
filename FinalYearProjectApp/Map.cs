@@ -90,7 +90,7 @@ namespace FinalYearProjectApp
             protected override void OnPostExecute(string result)
             {
                 base.OnPostExecute(result);
-                //activity.jobList = JsonConvert.DeserializeObject<List<Job>>(result);
+                activity.jobList = JsonConvert.DeserializeObject<List<Job>>(result);
                 activity.SetUpMap();
                 pd.Dismiss();
                 //return list;
@@ -163,7 +163,7 @@ namespace FinalYearProjectApp
                 longitude = currentLocation.Longitude;
                 userPostion = new LatLng(latitude, longitude);
 
-                jobList = jobModel.GetLocalJobAd(latitude, longitude).Result;
+                List<Job> newJobList = jobModel.GetLocalJobAd(jobList, latitude, longitude).Result;
                 //new GetData(this).Execute(UrlBuilder.getJobApi());
                 //List<Job> jobList = new List<Job>();
                 //CurrentJobList = DownloadDataAsync().Result;//jobModel.GetLocalJobAd(latitude, longitude);
@@ -205,7 +205,7 @@ namespace FinalYearProjectApp
 
         }
 
-        public async void onMakerClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
+        public void onMakerClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
         {
             //throw new NotImplementedException();
             List<JobAd> jobAdList = jobAds;
@@ -214,9 +214,11 @@ namespace FinalYearProjectApp
                 from JobAd in jobAdList
                 where JobAd.jobMarkerID == item.Id
                 select JobAd;
-            Job selectedJob = await jobModel.GetJob(selectedJobList.FirstOrDefault().jobAdGUID);
+            List<JobAd> testList = selectedJobList.ToList();
+            JobAd selectedJob = testList.FirstOrDefault();//await jobModel.GetJob(selectedJobList.FirstOrDefault().jobAdGUID);
             var intent = new Intent(this, typeof(JobAdDetails));
-            intent.PutExtra("selectedJobGuid", selectedJob.JobUID.ToString());
+            //string jobGUID = "2DF131DF-0DA6-40D1-A861-72957BA184D6";
+            intent.PutExtra("selectedJobGuid", selectedJob.jobAdGUID);
             StartActivity(intent);
 
         }
@@ -246,12 +248,11 @@ namespace FinalYearProjectApp
                     longitude = currentLocation.Longitude;
                     userPostion = new LatLng(latitude, longitude);
 
-                    List<Job> jobList = new List<Job>();
-                    jobList = await jobModel.GetLocalJobAd(latitude, longitude);
+                    List<Job> newJobList = jobModel.GetLocalJobAd(jobList, latitude, longitude).Result;
 
-                    if (jobList != null)
+                    if (newJobList != null)
                     {
-                        foreach (Job job in jobList)
+                        foreach (Job job in newJobList)
                         {
                             MarkerOptions jobMarkerOpt = new MarkerOptions();
 

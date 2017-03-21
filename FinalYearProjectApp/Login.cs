@@ -9,7 +9,7 @@ using SQLite;
 
 namespace FinalYearProjectApp
 {
-    [Activity(Label = "Login", Icon = "@drawable/icon", MainLauncher = true)]
+    [Activity( Icon = "@drawable/JobAdIcon", MainLauncher = true)]
     public class LoginActivity : Activity
     {
         EditText edtEmailAddress;
@@ -28,6 +28,7 @@ namespace FinalYearProjectApp
             edtPassword = FindViewById<EditText>(Resource.Id.etxLoginPassword);
             btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
             btnRegister = FindViewById<Button>(Resource.Id.btnRegister);
+            edtPassword.InputType = Android.Text.InputTypes.TextVariationPassword | Android.Text.InputTypes.ClassText;
             btnLogin.Click += btnLogin_Click;
             btnRegister.Click += btnRegister_Click;
             checkedIfTablesExsists();
@@ -55,30 +56,6 @@ namespace FinalYearProjectApp
         {
             StartActivity(typeof(Register));
         }
-        //private void btnLogin_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-        //        var db = new SQLiteConnection(System.IO.Path.Combine(path, "user.db"));
-        //        var userTable = db.Table<User>();
-        //        var userData = userTable.Where(x => x.UserEmail == edtEmailAddress.Text && x.Password == edtPassword.Text);
-        //        //var userData = usermodel.getUserByCredentials(edtEmailAddress.Text, edtPassword.Text);
-        //        if (userData != null)
-        //        {
-        //            StartActivity(typeof(MainActivity));
-        //        }
-        //        else
-        //        {
-        //            Toast.MakeText(this, "User Email or password invalid", ToastLength.Short).Show();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
-        //    }
-        //}
-
 
 
         private void checkedIfTablesExsists()
