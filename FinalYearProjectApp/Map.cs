@@ -168,9 +168,9 @@ namespace FinalYearProjectApp
                 //List<Job> jobList = new List<Job>();
                 //CurrentJobList = DownloadDataAsync().Result;//jobModel.GetLocalJobAd(latitude, longitude);
 
-                if (jobList != null)
+                if (newJobList != null)
                 {
-                    foreach (Job job in jobList)
+                    foreach (Job job in newJobList)
                     {
                         MarkerOptions jobMarkerOpt = new MarkerOptions();
 

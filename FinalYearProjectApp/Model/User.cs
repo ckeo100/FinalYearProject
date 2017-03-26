@@ -44,11 +44,6 @@ namespace FinalYearProjectApp.Model
         public string jobName { get; set; }
         public string jobContactDetails { get; set; }
         //public object JobUID { get; internal set; }
-
-        public static implicit operator UserPotentialJob(Job v)
-        {
-            throw new NotImplementedException();
-        }
     }
     public class UserModel
     {
@@ -189,7 +184,27 @@ namespace FinalYearProjectApp.Model
                 Log.Info("There is a SQLite Exception", ex.Message);
                 
             }
-        
+        }
+        public void RemoveJobAdFromUserList(string jobID)
+        {
+            try
+            {
+                string path = sqliteHandler.getSqliteFolderLocation();
+                //path += "/.config";
+                var db = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db"));
+                var userJobListTableData = db.Table<UserPotentialJob>();
+                UserPotentialJob newPotentialJob = new UserPotentialJob();
+                var rowCount = db.Delete<UserPotentialJob>(jobID);
+              
+
+
+            }
+
+            catch (SQLiteException ex)
+            {
+                Log.Info("There is a SQLite Exception", ex.Message);
+
+            }
         }
         public User getUserByCredentials(String userEmail, String userPassword)
         {

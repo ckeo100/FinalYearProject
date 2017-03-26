@@ -17,7 +17,7 @@ namespace FinalYearProjectApp.AppServices
             return path; //+= "/.config"; ;
         }
 
-        public bool checkIfUserTableExsists()
+        public bool checkIfUserTableExists()
         {
             try
             {
@@ -46,7 +46,7 @@ namespace FinalYearProjectApp.AppServices
 
         }
 
-        public bool checkIfJobTableExsists()
+        public bool checkIfJobTableExists()
         {
             try
             {

@@ -159,7 +159,7 @@ namespace FinalYearProjectApp
                 foreach (string skill in activity.jobItem.JobBasicQualification)
                 {
 
-                    JobBasicQualificationString += "&#8226;" + skill + "";
+                    JobBasicQualificationString += "<br /> &#8226;" + skill + "";
                     //activity.txvRequiredQualificationsAndSkillsText.SetText(JobBasicQualificationString.ToCharArray(), 0, JobBasicQualificationString.ToCharArray().Length);// += string.Format(@"\u2022 {0}\n", skill);
                 }
                 JobBasicQualificationString += "</body>";
@@ -172,7 +172,7 @@ namespace FinalYearProjectApp
                 JobAdditionalSkillsAndQaulificationsString += "</body>";
                 activity.txvAddtionalQualificationsAndSkillsText.TextFormatted = Html.FromHtml(JobAdditionalSkillsAndQaulificationsString);//SetText( JobAdditionalSkillsAndQaulificationsString.ToCharArray(), 0, JobAdditionalSkillsAndQaulificationsString.ToCharArray().Length);
                 //Android.Text.FromHtmlOptions.
-
+                activity.txvJobDescriptionText.Text = activity.jobItem.JobDescription;
 
             }
         }

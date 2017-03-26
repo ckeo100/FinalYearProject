@@ -17,6 +17,8 @@ using FinalYearProjectApp.AppServices;
 using Newtonsoft.Json;
 using Android.Text;
 
+
+
 namespace FinalYearProjectApp
 {
     
@@ -26,6 +28,7 @@ namespace FinalYearProjectApp
         JobModel jobModel = new JobModel();
         ContactHandler contactHandler = new ContactHandler();
         Job jobItem = new Job();
+        UserModel userModel = new UserModel();
         bool isContactDetailEmail;
         public TextView txvJobLabel;
         public TextView txvEmploymentTypeText;
@@ -34,8 +37,10 @@ namespace FinalYearProjectApp
         public TextView txvAddtionalQualificationsAndSkillsText;
         public TextView txvJobDescriptionText;
         public Button btnContactButton;
+        public Button btnRemoveButtonFormList;
         public Guid jobGuid;
         string jobString;
+        //public Task DisplayAlert();
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -49,8 +54,11 @@ namespace FinalYearProjectApp
             txvAddtionalQualificationsAndSkillsText = FindViewById<TextView>(Resource.Id.txvAdditionalQualifictionAndSkills);
             txvJobDescriptionText = FindViewById<TextView>(Resource.Id.txvJobDescription);
             btnContactButton = FindViewById<Button>(Resource.Id.btnContectButton);
+            btnRemoveButtonFormList = FindViewById<Button>(Resource.Id.btnRemoveFromList);
             btnContactButton.Click += btnContactButton_Click;
+            btnRemoveButtonFormList.Click += btnRemoveButtonFormList_Click;
             jobString = Intent.Extras.GetString("selectedJobGuid");
+
             //jobItem = new Job();
             new GetData(this).Execute(UrlBuilder.getJobSingle(jobString));
             //jobGuid = Guid.Parse(jobGuidString);
@@ -60,6 +68,28 @@ namespace FinalYearProjectApp
 
 
             // Create your application here
+        }
+
+        private async void btnRemoveButtonFormList_Click(object sender, EventArgs e)
+        {
+
+            //set alert for executing the task
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Confirm Removal");
+            alert.SetMessage("Are you sure you want to remove this job from your list.");
+            alert.SetPositiveButton("Remove", (senderAlert, args) => {
+                userModel.RemoveJobAdFromUserList(jobItem.JobUID);
+                var intent = new Intent(this, typeof(UserJobListActivity));
+                StartActivity(intent);
+                Toast.MakeText(this, "Removed!", ToastLength.Short).Show();
+            });
+
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                Toast.MakeText(this, "Cancelled!", ToastLength.Short).Show();
+            });
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
         }
 
         private void btnContactButton_Click(object sender, EventArgs e)
@@ -141,6 +171,7 @@ namespace FinalYearProjectApp
                 JobAdditionalSkillsAndQaulificationsString += "</body>";
                 activity.txvAddtionalQualificationsAndSkillsText.TextFormatted = Html.FromHtml(JobAdditionalSkillsAndQaulificationsString);//SetText( JobAdditionalSkillsAndQaulificationsString.ToCharArray(), 0, JobAdditionalSkillsAndQaulificationsString.ToCharArray().Length);
                 //Android.Text.FromHtmlOptions.
+                activity.txvJobDescriptionText.Text = activity.jobItem.JobDescription;
 
 
                 activity.isContactDetailEmail = activity.contactHandler.IsContactEmailAddress(activity.jobItem.RecruiterContactDetails);

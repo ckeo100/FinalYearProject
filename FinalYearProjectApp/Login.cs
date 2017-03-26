@@ -60,12 +60,12 @@ namespace FinalYearProjectApp
 
         private void checkedIfTablesExsists()
         {
-            bool userDoesExsists = sqlhandler.checkIfUserTableExsists();
-            bool joblistDoesExsists = sqlhandler.checkIfJobTableExsists();
+            bool userDoesExsists = sqlhandler.checkIfUserTableExists();
+            bool joblistDoesExsists = sqlhandler.checkIfJobTableExists();
             if (userDoesExsists == false)
             {
                 sqlhandler.createUserDB();
-                bool checkAgain = sqlhandler.checkIfUserTableExsists();
+                bool checkAgain = sqlhandler.checkIfUserTableExists();
             }
             if (joblistDoesExsists == false)
             {

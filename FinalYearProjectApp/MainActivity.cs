@@ -16,7 +16,7 @@ namespace FinalYearProjectApp
     [Activity( Icon = "@drawable/JobAdIconv3", MainLauncher = true)]
     public class MainActivity : Activity
     {
-        public Button btnUserLocation;
+        //public Button btnUserLocation;
         public Button btnUserList;
         public Button btnGoToMapView;
 
@@ -25,7 +25,7 @@ namespace FinalYearProjectApp
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-            btnUserLocation = FindViewById<Button>(Resource.Id.btnCurrentLocation);
+            //btnUserLocation = FindViewById<Button>(Resource.Id.btnCurrentLocation);
             btnUserList = FindViewById<Button>(Resource.Id.btnUserJobList);
             btnGoToMapView = FindViewById<Button>(Resource.Id.btnToMapView);
             HandleEvents();
@@ -35,7 +35,7 @@ namespace FinalYearProjectApp
 
         private void HandleEvents()
         {
-            btnUserLocation.Click += btnUserLocation_Click;
+            //btnUserLocation.Click += btnUserLocation_Click;
             btnUserList.Click += btnUserList_Click;
             btnGoToMapView.Click += btnGoToMapView_Click;
             

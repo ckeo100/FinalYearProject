@@ -21,11 +21,6 @@ using Newtonsoft.Json;
 using System.Json;
 using System.Net.Http;
 
-
-
-
-
-
 namespace FinalYearProjectApp.Model
 {
     public class Id
@@ -50,15 +45,6 @@ namespace FinalYearProjectApp.Model
         public string JobDescription { get; set; }
         public Address JobAddress { get; set; }
         public string RecruiterContactDetails { get; set; }
-
-        //public Job()
-        //{
-        //    this.JobUID = Guid.Empty.ToString();
-        //    this.EmployeeUID = Guid.Empty.ToString();
-        //    this.JobName = "Job Name";
-        //    new List<string> = new List<>(new int[] { 2, 3, 7 });
-        //    this.JobTags = 
-        //}
 
     }
 
@@ -139,12 +125,12 @@ namespace FinalYearProjectApp.Model
         {
             //IMongoCollection<Job> jobColl = MongoConnection();
             //radius of the search criteria circle  
-            string url = UrlBuilder.getJobApi();
-            //JobModel.GetData getData = new GetData();
+            //string url = UrlBuilder.getJobApi();
+            ////JobModel.GetData getData = new GetData();
+            ////HttpDataHandler http = new HttpDataHandler();
+            //string stream = null;
             //HttpDataHandler http = new HttpDataHandler();
-            string stream = null;
-            HttpDataHandler http = new HttpDataHandler();
-            stream = http.GetHTTPData(url);
+            //stream = http.GetHTTPData(url);
             //string stream = http.GetHTTPData(url);
 
             var jobArray = jobList.ToArray();//JsonConvert.DeserializeObject<List<Job>>(stream);

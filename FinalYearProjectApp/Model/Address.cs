@@ -16,7 +16,7 @@ namespace FinalYearProjectApp.Model
     public class Address : GeoLocation
     {
         public String LocationLine1 { get; set; }
-        public String LocationLIne2 { get; set; }
+        public String LocationLine2 { get; set; }
         public String LocationCity { get; set; }
         public String LocationPostCode { get; set; }
 
