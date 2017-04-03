@@ -2,47 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-  <TextView
-      android:text="Register"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textView1"
-      android:gravity="center" />
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/etxResgisterFirstName"
-      android:hint="First Name" />
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/etxRegisterLastName"
-      android:hint="Last Name" />
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/etxRegisterEmailAddress"
-      android:hint="Email" />
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/etxRegisterConfirmEmail"
-      android:hint="Confirm Email" />
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/etxRegisterPassword"
-      android:hint="Password" />
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/etxRegisterConfirmPassword"
-      android:hint="Confirm Password" />
-  <Button
-      android:text="Register Account"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/btnRegisterAccount" />
+    android:layout_height="match_parent"
+    android:id="@+id/LinLayout">
+    <TextView
+        android:text="Register"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:gravity="center" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxResgisterFirstName"
+        android:hint="First Name" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxRegisterLastName"
+        android:hint="Last Name" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxRegisterEmailAddress"
+        android:hint="Email" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxRegisterConfirmEmail"
+        android:hint="Confirm Email" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxRegisterPassword"
+        android:hint="Password" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxRegisterConfirmPassword"
+        android:hint="Confirm Password" />
+    <Button
+        android:text="Register Account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnRegisterAccount" />
 </LinearLayout>

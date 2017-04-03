@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/LinLayout">
     <ImageView
         android:src="@drawable/Logo"
         android:layout_width="112.0dp"
@@ -35,7 +36,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnLogin"
         android:gravity="center"
-        android:layout_marginLeft="0.0dp" />
+        android:layout_marginLeft="0.0dp"
+        android:layout_marginBottom="20.5dp" />
     <Button
         android:text="Register"
         android:layout_width="match_parent"

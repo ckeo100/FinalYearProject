@@ -31,43 +31,32 @@ namespace FinalYearProjectApp
         public Button btnAddJobToList;
         public Guid jobGuid;
         string jobString;//= Intent.Extras.GetString("selectedJobGuid");
+        LinearLayout linearLayout;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.JobAdDetails);
-            
+            ActionBar.Hide();
+            linearLayout = FindViewById<LinearLayout>(Resource.Id.MenuLinearLayout);
+            linearLayout.SetBackgroundColor(Android.Graphics.Color.ParseColor("#530053"));
             txvJobLabel = FindViewById<TextView>(Resource.Id.lblJobName);
             txvEmploymentTypeText = FindViewById<TextView>(Resource.Id.txvEmploymentType);
             txvSalaryText = FindViewById<TextView>(Resource.Id.txvSalary);
             txvRequiredQualificationsAndSkillsText = FindViewById<TextView>(Resource.Id.txvRequiredQualificationsAndSkills);
+            txvRequiredQualificationsAndSkillsText.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             txvAddtionalQualificationsAndSkillsText = FindViewById<TextView>(Resource.Id.txvAdditionalQualifictionAndSkills);
+            txvAddtionalQualificationsAndSkillsText.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             txvJobDescriptionText = FindViewById<TextView>(Resource.Id.txvJobDescription);
+            txvJobDescriptionText.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             btnAddJobToList = FindViewById<Button>(Resource.Id.btnAddJobList);
+            btnAddJobToList.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
 
             jobString = Intent.Extras.GetString("selectedJobGuid");
             new GetData(this).Execute(UrlBuilder.getJobSingle(jobString));
-            //jobItem = await jobModel.GetJob(jobString);
-
-            //txvJobLabel.Text = jobItem.JobName;
-            //txvEmploymentTypeText.Text += jobItem.JobEmploymentType;
-            //string completeSalary = string.Format("{0}-{1} per {2}", jobItem.JobSalaryMin, jobItem.JobSalaryMax, jobItem.JobSalaryRate);
-            //txvSalaryText.Text += completeSalary;
-            //foreach (string skill in jobItem.JobBasicQualification)
-            //{
-            //    txvRequiredQualificationsAndSkillsText.Text += string.Format(">{0}\n", skill);
-            //}
-            //foreach (string skill in jobItem.JobAdditionalSkillsAndQaulifications)
-            //{
-            //    txvAddtionalQualificationsAndSkillsText.Text += string.Format(">{0}\n", skill);
-            //}
-
-            //txvJobDescriptionText.Text += jobItem.JobDescription;
 
             btnAddJobToList.Click += addToListButton_Click;
 
-
-            // Create your application here
         }
 
 
@@ -83,8 +72,8 @@ namespace FinalYearProjectApp
 
                 if (user != null)
                 {
-                    List<UserPotentialJob> userJobList = userModel.ShowUserJobList(user.UserUID);
-                    bool containsJobID = userJobList.Any(x => x.jobGuid == jobString);//user.UserJobIDList.Any(idData => idData == jobString);
+                    List<UserPotentialJob> UserJobAd = userModel.ShowUserJobAd(user.UserUID);
+                    bool containsJobID = UserJobAd.Any(x => x.jobGuid == jobString);//user.UserJobIDList.Any(idData => idData == jobString);
 
                     if (containsJobID == true)
                     {
@@ -92,7 +81,7 @@ namespace FinalYearProjectApp
                     }
                     else
                     {
-                        userModel.addToUserJobList(user.UserUID, jobString, jobItem.JobName, jobItem.RecruiterContactDetails);
+                        userModel.addToUserJobAd(user.UserUID, jobString, jobItem.JobName, jobItem.RecruiterContactDetails);
                         StartActivity(typeof(Map));
                     }
 
@@ -141,11 +130,7 @@ namespace FinalYearProjectApp
                 base.OnPostExecute(result);
                 activity.jobItem = JsonConvert.DeserializeObject<List<Job>>(result).FirstOrDefault();
                 assignValue();
-                //activity.SetUpMap();
                 pd.Dismiss();
-                //return list;
-
-
             }
             public void assignValue()
             {
@@ -154,8 +139,8 @@ namespace FinalYearProjectApp
                 activity.txvEmploymentTypeText.Text += activity.jobItem.JobEmploymentType;
                 string completeSalary = string.Format("{0}-{1} per {2}", activity.jobItem.JobSalaryMin, activity.jobItem.JobSalaryMax, activity.jobItem.JobSalaryRate);
                 activity.txvSalaryText.Text += completeSalary;
-                string JobBasicQualificationString = "<body> <br /> ";
-                string JobAdditionalSkillsAndQaulificationsString = "<body> <br />";
+                string JobBasicQualificationString = "<body>";
+                string JobAdditionalSkillsAndQaulificationsString = "<body>";
                 foreach (string skill in activity.jobItem.JobBasicQualification)
                 {
 
@@ -173,6 +158,10 @@ namespace FinalYearProjectApp
                 activity.txvAddtionalQualificationsAndSkillsText.TextFormatted = Html.FromHtml(JobAdditionalSkillsAndQaulificationsString);//SetText( JobAdditionalSkillsAndQaulificationsString.ToCharArray(), 0, JobAdditionalSkillsAndQaulificationsString.ToCharArray().Length);
                 //Android.Text.FromHtmlOptions.
                 activity.txvJobDescriptionText.Text = activity.jobItem.JobDescription;
+                int txtViewHightInPixels = activity.txvJobDescriptionText.LineCount * activity.txvJobDescriptionText.LineHeight;
+                
+                activity.txvJobDescriptionText.SetHeight(txtViewHightInPixels); 
+                activity.txvJobDescriptionText.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
 
             }
         }

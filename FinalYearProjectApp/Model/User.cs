@@ -139,36 +139,36 @@ namespace FinalYearProjectApp.Model
         }
 
 
-        public List<UserPotentialJob> ShowUserJobList (Guid userID)
+        public List<UserPotentialJob> ShowUserJobAd (Guid userID)
         {
-            List<UserPotentialJob> userJobList = new List<UserPotentialJob>();
+            List<UserPotentialJob> UserJobAd = new List<UserPotentialJob>();
 
             try
             {
                 string path = sqliteHandler.getSqliteFolderLocation();
                 //path += "/.config";
-                var db = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db"));
-                var userJobListTableData = db.Table<UserPotentialJob>();
-                userJobList = userJobListTableData.Where(x => x.userUID == userID).ToList();
-                return userJobList;
+                var db = new SQLiteConnection(System.IO.Path.Combine(path, "UserJobAd"));
+                var UserJobAdTableData = db.Table<UserPotentialJob>();
+                UserJobAd = UserJobAdTableData.Where(x => x.userUID == userID).ToList();
+                return UserJobAd;
                 
             }
             catch
             {
-                return userJobList;
+                return UserJobAd;
             }
             //List<Job> userJobs = new List<Job>();
             //return userJobs;
         }
 
-        public void addToUserJobList(Guid UserGuid, string jobID, string jobName, string contactDetails)
+        public void addToUserJobAd(Guid UserGuid, string jobID, string jobName, string contactDetails)
         {
             try
             {
                 string path = sqliteHandler.getSqliteFolderLocation();
                 //path += "/.config";
-                var db = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db"));
-                var userJobListTableData = db.Table<UserPotentialJob>();
+                var db = new SQLiteConnection(System.IO.Path.Combine(path, "UserJobAd"));
+                var UserJobAdTableData = db.Table<UserPotentialJob>();
                 UserPotentialJob newPotentialJob = new UserPotentialJob();
                 newPotentialJob.userUID = UserGuid;
                 newPotentialJob.jobGuid = jobID;
@@ -191,8 +191,8 @@ namespace FinalYearProjectApp.Model
             {
                 string path = sqliteHandler.getSqliteFolderLocation();
                 //path += "/.config";
-                var db = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db"));
-                var userJobListTableData = db.Table<UserPotentialJob>();
+                var db = new SQLiteConnection(System.IO.Path.Combine(path, "UserJobAd"));
+                var UserJobAdTableData = db.Table<UserPotentialJob>();
                 UserPotentialJob newPotentialJob = new UserPotentialJob();
                 var rowCount = db.Delete<UserPotentialJob>(jobID);
               

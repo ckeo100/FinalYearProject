@@ -21,45 +21,71 @@ using Newtonsoft.Json;
 namespace FinalYearProjectApp
 {
     [Activity()]
-    public class UserJobListActivity : Activity
+    public class UserJobAdActivity : Activity
     {
-        private ListView userJobListView;
+        private ListView UserJobAdView;
         public List<UserPotentialJob> userJobs;
         private Button btnEmailToUser;
-        //private UserJobListActivity activity;
+        //private UserJobAdActivity activity;
         private FinalYearProjectClassLibrary.Controllers.UserController userManager;
         //private JobsTempRepository jobTempRepository;
         private JobModel jobModel;
         public UserModel userModel;
+        LinearLayout linearLayout;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            ActionBar.Hide();
             SetContentView(Resource.Layout.UserJobListView);
-            
-            userJobListView = FindViewById<ListView>(Resource.Id.LTVUserJobs);
+            linearLayout = FindViewById<LinearLayout>(Resource.Id.JobListLinearLayout);
+            linearLayout.SetBackgroundColor(Android.Graphics.Color.ParseColor("#530053"));
+            UserJobAdView = FindViewById<ListView>(Resource.Id.LTVUserJobs);
             btnEmailToUser = FindViewById<Button>(Resource.Id.btnSendListToEmail);
+            btnEmailToUser.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             userModel = new UserModel();
             userManager = new FinalYearProjectClassLibrary.Controllers.UserController();
             var currentUser = userModel.getCurrentUser();
             //jobTempRepository = new JobsTempRepository();
-            //userModel.ShowUserJobList()
+            //userModel.ShowUserJobAd()
             //List<UserPotentialJob> cureentUserPotetnialJobList = new List<UserPotentialJob>();
-            userJobs = userModel.ShowUserJobList(currentUser.UserUID);//new List<Job>();//userModel.user.UserJobList;//userManager.ShowUsersJobList();
+            userJobs = userModel.ShowUserJobAd(currentUser.UserUID);//new List<Job>();//userModel.user.UserJobAd;//userManager.ShowUsersJobList();
             btnEmailToUser.Click += btnEmailToUser_Click;
             //if ( currentUser.UserUID != null)
             //{
-            //    cureentUserPotetnialJobList = userModel.ShowUserJobList( currentUser.UserUID);
+            //    cureentUserPotetnialJobList = userModel.ShowUserJobAd( currentUser.UserUID);
             //    foreach (UserPotentialJob potentialJob in cureentUserPotetnialJobList)
             //    {
             //        Job newJob = jobModel.GetJob(potentialJob.jobGuid).Result;
             //    }
             //}
 
-            userJobListView.Adapter = new JobListAdaptor(this, userJobs);
-            userJobListView.FastScrollEnabled = true;
-            userJobListView.ItemClick += userJobListView_ItemClick;
+            UserJobAdView.Adapter = new JobListAdaptor(this, userJobs);
+            UserJobAdView.FastScrollEnabled = true;
+            UserJobAdView.ItemClick += UserJobAdView_ItemClick;
+            UserJobAdView.ItemLongClick += UserJobAdView_ItemLongClick;
             Window.SetTitle(userModel.user.UserEmail);
+        }
+
+        private void UserJobAdView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            UserPotentialJob job = userJobs[e.Position];
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Confirm Removal");
+            alert.SetMessage("Are you sure you want to remove this job from your list.");
+            alert.SetPositiveButton("Remove", (senderAlert, args) => {
+                userModel.RemoveJobAdFromUserList(job.jobGuid);
+                var intent = new Intent(this, typeof(UserJobAdActivity));
+                StartActivity(intent);
+                Toast.MakeText(this, "Removed!", ToastLength.Short).Show();
+            });
+
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                Toast.MakeText(this, "Cancelled!", ToastLength.Short).Show();
+            });
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
         }
 
         private void btnEmailToUser_Click(object sender, EventArgs e)
@@ -87,7 +113,7 @@ namespace FinalYearProjectApp
 
         }
 
-        private void userJobListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void UserJobAdView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
 
             UserPotentialJob job = userJobs[e.Position];
@@ -102,9 +128,9 @@ namespace FinalYearProjectApp
         private class GetData : AsyncTask<string, Java.Lang.Void, string>
         {
             private ProgressDialog pd = new ProgressDialog(Application.Context);
-            private UserJobListActivity activity;
+            private UserJobAdActivity activity;
 
-            public GetData(UserJobListActivity activity)
+            public GetData(UserJobAdActivity activity)
             {
                 this.activity = activity;
             }
@@ -138,7 +164,7 @@ namespace FinalYearProjectApp
                     Job newJob = jobList.Where(x => x.JobUID == jobAd.jobGuid).FirstOrDefault();
                     newJobList.Add( newJob);
                 }
-                //List<Job> userJobList = jobList.Where(x => x.JobUID;//.Where<>;
+                //List<Job> UserJobAd = jobList.Where(x => x.JobUID;//.Where<>;
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("The current list of jobs that you have found. \n");
 

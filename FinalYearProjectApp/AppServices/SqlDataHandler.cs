@@ -51,7 +51,7 @@ namespace FinalYearProjectApp.AppServices
             try
             {
                 //string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                using (var connection = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db")))
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(path, "UserJobAd")))
                 {
                     var JobListTable = connection.Table<UserPotentialJob>();
                     var JobListdata = JobListTable.FirstOrDefault();
@@ -100,7 +100,7 @@ namespace FinalYearProjectApp.AppServices
             try
             {
                 //string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                using (var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db")))
+                using (var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "UserJobAd")))
                 {
                     connnection.CreateTable<UserPotentialJob>();
                     return true;
@@ -117,7 +117,7 @@ namespace FinalYearProjectApp.AppServices
 
         public void resetNewJobListDB()
         {
-            var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "joblist.db"));
+            var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "UserJobAd"));
             connnection.DropTable<UserPotentialJob>();
         }
 

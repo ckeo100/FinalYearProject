@@ -33,7 +33,7 @@ namespace FinalYearProjectApp.AppServices
             }
         }
 
-        public void sendEmailList(List<UserPotentialJob> userJobList)
+        public void sendEmailList(List<UserPotentialJob> UserJobAd)
         {
             UserModel usermodel = new UserModel();
             User userDetails = usermodel.getCurrentUser();

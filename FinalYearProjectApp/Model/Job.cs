@@ -121,7 +121,7 @@ namespace FinalYearProjectApp.Model
         //    foreach potentialJobIn
         //}
 
-        public async Task<List<Job>> GetLocalJobAd(List<Job> jobList,double currentLatitude, double currentLongitude)
+        public string GetLocalJobAd(double currentLatitude, double currentLongitude)//List<Job> jobList,double currentLatitude, double currentLongitude)
         {
             //IMongoCollection<Job> jobColl = MongoConnection();
             //radius of the search criteria circle  
@@ -133,7 +133,7 @@ namespace FinalYearProjectApp.Model
             //stream = http.GetHTTPData(url);
             //string stream = http.GetHTTPData(url);
 
-            var jobArray = jobList.ToArray();//JsonConvert.DeserializeObject<List<Job>>(stream);
+            //var jobArray = jobList.ToArray();//JsonConvert.DeserializeObject<List<Job>>(stream);
 
             double searchDistanceInKM = 1;
             //radius of earth
@@ -146,13 +146,15 @@ namespace FinalYearProjectApp.Model
             double minLong = currentLongitudeRad - mathService.ConvertRadianToDegree(System.Math.Asin(searchDistanceInKM / radiusOfTheEarthInKm)) / System.Math.Cos(mathService.ConvertDegreesToRadians(currentLatitude));
 
 
-            List<Job> fullJobList = jobArray.ToList();
+            //List<Job> fullJobList = jobArray.ToList();
+            HttpDataHandler http = new HttpDataHandler();
 
-
-            List<Job> searchCriteriaJobs = fullJobList.Where(j => j.JobAddress.Latitiude >= minLat
-           && j.JobAddress.Latitiude <= maxLat
-           && j.JobAddress.Longitude >= minLong
-           && j.JobAddress.Longitude <= maxLong).ToList();
+            // List<Job> searchCriteriaJobs = fullJobList.Where(j => j.JobAddress.Latitiude >= minLat
+            //&& j.JobAddress.Latitiude <= maxLat
+            //&& j.JobAddress.Longitude >= minLong
+            //&& j.JobAddress.Longitude <= maxLong).ToList();
+            var searchCriteriaJobs = http.GetHTTPData(UrlBuilder.getLocalJobs(maxLong, minLong, maxLat, minLat));
+            
             return searchCriteriaJobs;
         }
 

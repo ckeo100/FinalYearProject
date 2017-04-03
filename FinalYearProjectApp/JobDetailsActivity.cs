@@ -40,12 +40,17 @@ namespace FinalYearProjectApp
         public Button btnRemoveButtonFormList;
         public Guid jobGuid;
         string jobString;
+        LinearLayout linearLayout;
         //public Task DisplayAlert();
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            
             SetContentView(Resource.Layout.JobDetails);
+            ActionBar.Hide();
+            linearLayout = FindViewById<LinearLayout>(Resource.Id.JobDetailsLinearLayout);
+            linearLayout.SetBackgroundColor(Android.Graphics.Color.ParseColor("#530053"));
             //new GetData(this).Execute(UrlBuilder.getJobApi());
             txvJobLabel = FindViewById<TextView>(Resource.Id.lblJobName);
             txvEmploymentTypeText = FindViewById<TextView>(Resource.Id.txvEmploymentType);
@@ -54,7 +59,9 @@ namespace FinalYearProjectApp
             txvAddtionalQualificationsAndSkillsText = FindViewById<TextView>(Resource.Id.txvAdditionalQualifictionAndSkills);
             txvJobDescriptionText = FindViewById<TextView>(Resource.Id.txvJobDescription);
             btnContactButton = FindViewById<Button>(Resource.Id.btnContectButton);
+            btnContactButton.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             btnRemoveButtonFormList = FindViewById<Button>(Resource.Id.btnRemoveFromList);
+            btnRemoveButtonFormList.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             btnContactButton.Click += btnContactButton_Click;
             btnRemoveButtonFormList.Click += btnRemoveButtonFormList_Click;
             jobString = Intent.Extras.GetString("selectedJobGuid");
@@ -79,7 +86,7 @@ namespace FinalYearProjectApp
             alert.SetMessage("Are you sure you want to remove this job from your list.");
             alert.SetPositiveButton("Remove", (senderAlert, args) => {
                 userModel.RemoveJobAdFromUserList(jobItem.JobUID);
-                var intent = new Intent(this, typeof(UserJobListActivity));
+                var intent = new Intent(this, typeof(UserJobAdActivity));
                 StartActivity(intent);
                 Toast.MakeText(this, "Removed!", ToastLength.Short).Show();
             });
@@ -172,6 +179,9 @@ namespace FinalYearProjectApp
                 activity.txvAddtionalQualificationsAndSkillsText.TextFormatted = Html.FromHtml(JobAdditionalSkillsAndQaulificationsString);//SetText( JobAdditionalSkillsAndQaulificationsString.ToCharArray(), 0, JobAdditionalSkillsAndQaulificationsString.ToCharArray().Length);
                 //Android.Text.FromHtmlOptions.
                 activity.txvJobDescriptionText.Text = activity.jobItem.JobDescription;
+                int txtViewHightInPixels = activity.txvJobDescriptionText.LineCount * activity.txvJobDescriptionText.LineHeight;
+
+                activity.txvJobDescriptionText.SetHeight(txtViewHightInPixels);
 
 
                 activity.isContactDetailEmail = activity.contactHandler.IsContactEmailAddress(activity.jobItem.RecruiterContactDetails);

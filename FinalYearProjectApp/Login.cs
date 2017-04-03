@@ -16,18 +16,31 @@ namespace FinalYearProjectApp
         EditText edtPassword;
         Button btnLogin;
         Button btnRegister;
+
         UserModel usermodel = new UserModel();
         SqlDataHandler sqlhandler = new SqlDataHandler();
+
+        LinearLayout linearLayout;
+        
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Login);
+
+            ActionBar.Hide();
+            linearLayout = FindViewById<LinearLayout>(Resource.Id.LinLayout);
+
+            //var view = FindViewById<Resource.Layout>(Resource.Layout.Login);
+            linearLayout.SetBackgroundColor(Android.Graphics.Color.ParseColor("#530053"));
             edtEmailAddress = FindViewById<EditText>(Resource.Id.etxLoginUserEmail);
             edtPassword = FindViewById<EditText>(Resource.Id.etxLoginPassword);
-            btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
+            btnLogin = FindViewById<Button>(Resource.Id.btnLogin) ;
+            btnLogin.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
+            
             btnRegister = FindViewById<Button>(Resource.Id.btnRegister);
+            btnRegister.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             edtPassword.InputType = Android.Text.InputTypes.TextVariationPassword | Android.Text.InputTypes.ClassText;
             btnLogin.Click += btnLogin_Click;
             btnRegister.Click += btnRegister_Click;

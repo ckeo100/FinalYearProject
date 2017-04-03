@@ -19,15 +19,20 @@ namespace FinalYearProjectApp
         //public Button btnUserLocation;
         public Button btnUserList;
         public Button btnGoToMapView;
-
+        LinearLayout linearLayout; 
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+            ActionBar.Hide();
             //btnUserLocation = FindViewById<Button>(Resource.Id.btnCurrentLocation);
-            btnUserList = FindViewById<Button>(Resource.Id.btnUserJobList);
+            linearLayout = FindViewById<LinearLayout>(Resource.Id.MenuLinearLayout);
+            linearLayout.SetBackgroundColor(Android.Graphics.Color.ParseColor("#530053"));
+            btnUserList = FindViewById<Button>(Resource.Id.btnUserJobAd);
+            btnUserList.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             btnGoToMapView = FindViewById<Button>(Resource.Id.btnToMapView);
+            btnGoToMapView.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             HandleEvents();
             // Set our view from the "main" layout resource
 
@@ -49,7 +54,7 @@ namespace FinalYearProjectApp
 
         private void btnUserList_Click(object sender, EventArgs e)
         {
-            var intent = new Intent(this, typeof(UserJobListActivity));
+            var intent = new Intent(this, typeof(UserJobAdActivity));
             StartActivity(intent);
         }
 

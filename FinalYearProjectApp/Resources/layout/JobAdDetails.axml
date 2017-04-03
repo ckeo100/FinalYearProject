@@ -1,74 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="25px"
-    android:minHeight="25px"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/scrollView1">
-    <LinearLayout
-        android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:text="Job Name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:id="@+id/scrollView1">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lblJobName" />
-        <TextView
-            android:text="Employment type:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lblEmplymentType" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txvEmploymentType" />
-        <TextView
-            android:text="Salary"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lblSalary" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txvSalary" />
-        <TextView
-            android:text="Required Qualifications and Skills:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lblRequiredQualificationsAndSkills" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="99.5dp"
-            android:id="@+id/txvRequiredQualificationsAndSkills" />
-        <TextView
-            android:text="Additional Qualifications and Skills"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lblAdditionalQualificationsAndSkills" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100.0dp"
-            android:id="@+id/txvAdditionalQualifictionAndSkills" />
-        <TextView
-            android:text="Job Description"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lblJobDescription" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100.5dp"
-            android:id="@+id/txvJobDescription" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnAddJobList"
-            android:text="Add this Job to your list" />
-    </LinearLayout>
-</ScrollView>
+            android:id="@+id/JobAdLinearLayout">
+            <TextView
+                android:text="Job Name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblJobName" />
+            <TextView
+                android:text="Employment type:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblEmplymentType" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txvEmploymentType" />
+            <TextView
+                android:text="Salary"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblSalary" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txvSalary" />
+            <TextView
+                android:text="Required Qualifications and Skills:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblRequiredQualificationsAndSkills" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="82.5dp"
+                android:id="@+id/txvRequiredQualificationsAndSkills" />
+            <TextView
+                android:text="Additional Qualifications and Skills"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblAdditionalQualificationsAndSkills" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="78.0dp"
+                android:id="@+id/txvAdditionalQualifictionAndSkills" />
+            <TextView
+                android:text="Job Description"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblJobDescription" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:id="@+id/txvJobDescription" />
+            <Button
+                android:text="Add job to your list"
+                android:id="@+id/btnAddJobList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13.0dp"
+                android:layout_marginBottom="13.0dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

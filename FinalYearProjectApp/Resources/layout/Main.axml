@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
-    android:minHeight="25px">
-  <!--
+    android:minHeight="25px"
+    android:id="@+id/MenuLinearLayout">
+<!--
     <Button
         android:text="Get User's Current Location"
         android:layout_width="match_parent"
@@ -14,13 +15,31 @@
         android:layout_marginTop="105.5dp"
         android:layout_marginBottom="5dp" />
         -->
-    <Button
-        android:text="User Job List"
+    <ImageView
+        android:src="@drawable/Logo"
+        android:layout_width="112.0dp"
+        android:layout_height="138.0dp"
+        android:id="@+id/imageView1"
+        android:layout_marginLeft="0.0dp"
+        android:layout_gravity="center" />
+    <TextView
+        android:text="EmployWhere"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnUserJobList" />
+        android:id="@+id/textView2"
+        android:gravity="center"
+        android:layout_marginTop="13.0dp"
+        android:layout_marginBottom="21.0dp" />
     <Button
-        android:text="Go to map"
+        android:text="View Your Jobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUserJobAd"
+        android:layout_marginTop="13.0dp"
+        android:layout_marginBottom="13.0dp" />
+    <Button
+        android:text="Search For Jobs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnToMapView" />
