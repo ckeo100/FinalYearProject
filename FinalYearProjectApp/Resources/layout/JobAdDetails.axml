@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:id="@+id/JobAdLinearLayout2">
     <ScrollView
         android:minWidth="25px"
         android:minHeight="25px"
@@ -19,13 +20,15 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblJobName" />
+                android:id="@+id/lblJobName"
+                android:layout_marginBottom="20.5dp" />
             <TextView
                 android:text="Employment type:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblEmplymentType" />
+                android:id="@+id/lblEmplymentType"
+                android:layout_marginBottom="6.5dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +38,9 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblSalary" />
+                android:id="@+id/lblSalary"
+                android:layout_marginBottom="7.5dp"
+                android:layout_marginTop="12.5dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +50,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblRequiredQualificationsAndSkills" />
+                android:id="@+id/lblRequiredQualificationsAndSkills"
+                android:layout_marginTop="11.5dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="82.5dp"
@@ -55,7 +61,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblAdditionalQualificationsAndSkills" />
+                android:id="@+id/lblAdditionalQualificationsAndSkills"
+                android:layout_marginTop="14.0dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="78.0dp"
@@ -65,7 +72,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblJobDescription" />
+                android:id="@+id/lblJobDescription"
+                android:layout_marginTop="13.0dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,8 +85,7 @@
                 android:id="@+id/btnAddJobList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13.0dp"
-                android:layout_marginBottom="13.0dp" />
+                android:layout_marginTop="13.0dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

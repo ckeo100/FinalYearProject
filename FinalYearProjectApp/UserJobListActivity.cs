@@ -90,26 +90,15 @@ namespace FinalYearProjectApp
 
         private void btnEmailToUser_Click(object sender, EventArgs e)
         {
-            //UserModel usermodel = new UserModel();
-            //User userDetails = usermodel.getCurrentUser();
-            new GetData(this).Execute(UrlBuilder.getJobApi());
+            if (userJobs.Count != 0)
+            {
+                new GetData(this).Execute(UrlBuilder.getJobApi());
+            }
+            else
+            {
+                Toast.MakeText(this, "You have no jobs on your list!", ToastLength.Short).Show();
+            }
 
-            //StringBuilder sb = new StringBuilder();
-            //sb.AppendLine("The current list of jobs that you have found. \n");
-
-
-            //foreach(UserPotentialJob userJob in userJobs)
-            //{
-            //    sb.Append("\n-"+userJob.jobName+"");
-            //    sb.Append("\n\t+" +userJob.+"");
-            //}
-
-            //Intent email = new Intent(Intent.ActionSend);
-            //email.PutExtra(Intent.ExtraEmail, new string[] { userDetails.UserEmail });
-            //email.PutExtra(Intent.ExtraSubject, "Test");
-            //email.PutExtra(Intent.ExtraText, "Test");
-            //email.SetType("message/rfc822");
-            //StartActivity(Intent.CreateChooser(email, "Send Email"));
 
         }
 

@@ -32,14 +32,17 @@ namespace FinalYearProjectApp
         public Guid jobGuid;
         string jobString;//= Intent.Extras.GetString("selectedJobGuid");
         LinearLayout linearLayout;
+        LinearLayout linearLayoutMain;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.JobAdDetails);
             ActionBar.Hide();
-            linearLayout = FindViewById<LinearLayout>(Resource.Id.MenuLinearLayout);
+            linearLayout = FindViewById<LinearLayout>(Resource.Id.JobAdLinearLayout);
+            linearLayoutMain = FindViewById<LinearLayout>(Resource.Id.JobAdLinearLayout2);
             linearLayout.SetBackgroundColor(Android.Graphics.Color.ParseColor("#530053"));
+            linearLayoutMain.SetBackgroundColor(Android.Graphics.Color.ParseColor("#530053"));
             txvJobLabel = FindViewById<TextView>(Resource.Id.lblJobName);
             txvEmploymentTypeText = FindViewById<TextView>(Resource.Id.txvEmploymentType);
             txvSalaryText = FindViewById<TextView>(Resource.Id.txvSalary);

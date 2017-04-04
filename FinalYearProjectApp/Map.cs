@@ -38,6 +38,9 @@ namespace FinalYearProjectApp
         public JobModel jobModel = new JobModel();
         public List<Job> jobList = new List<Job>();
         List<JobAd> jobAds = new List<JobAd>();
+        ImageButton btnSearchIcon;
+        string SearchIcon;
+        public string Url; 
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -50,10 +53,54 @@ namespace FinalYearProjectApp
             MathService mathService = new MathService();
             mathService.setBoundingCircle(currentGPSLocation.Latitude,currentGPSLocation.Longitude);
             UrlBuilder urlBuilder = new UrlBuilder();
-            new GetData(this).Execute(UrlBuilder.getLocalJobs(mathService.maxLong,mathService.minLong, mathService.maxLat,mathService.minLat));
+            if (Intent.Extras != null)
+            {
+                SearchIcon = Intent.Extras.GetString("SearchIcon");
+                Url = UrlBuilder.getLocalJobsWithSearch(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat, SearchIcon);
+            }
+            else
+            {
+                Url = UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat);
+            }
+            //string url = UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat);
+            btnSearchIcon = FindViewById<ImageButton>(Resource.Id.btnSearchIcon);
+            btnSearchIcon.Click += searchIcon_Click;
+            new GetData(this).Execute(Url);//UrlBuilder.getLocalJobs(mathService.maxLong,mathService.minLong, mathService.maxLat,mathService.minLat));
+
 
         }
-        
+
+        private void searchIcon_Click(object sender, EventArgs e)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            EditText input = new EditText(this);
+            
+            alert.SetView(input);
+            alert.SetTitle("Search For Jobs");
+            alert.SetMessage("Look for jobs with a title.");
+            alert.SetPositiveButton("Search", (senderAlert, args) => {
+                string searchCriteria = input.Text.ToString();
+                if (!string.IsNullOrEmpty(searchCriteria))
+                {
+                    var intent = new Intent(this, typeof(Map));
+                    intent.PutExtra("SearchIcon", input.Text);
+                    StartActivity(intent);
+                }
+                else
+                {
+                    Toast.MakeText(this, "Please enter your search critia!", ToastLength.Short).Show();
+                }
+                
+            });
+
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+                Toast.MakeText(this, "Cancelled!", ToastLength.Short).Show();
+            });
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
+        }
+
         private class GetData :AsyncTask<string, Java.Lang.Void, string>
         {
             private ProgressDialog pd = new ProgressDialog(Application.Context);
@@ -154,7 +201,18 @@ namespace FinalYearProjectApp
                 MathService mathService = new MathService();
                 mathService.setBoundingCircle(currentGPSLocation.Latitude, currentGPSLocation.Longitude);
                 UrlBuilder urlBuilder = new UrlBuilder();
-                new GetData(this).Execute(UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat));
+
+                if (Intent.Extras != null)
+                {
+                    SearchIcon = Intent.Extras.GetString("SearchIcon");
+                    Url = UrlBuilder.getLocalJobsWithSearch(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat, SearchIcon);
+                }
+                else
+                {
+                    Url = UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat);
+                }
+
+                new GetData(this).Execute(Url);//UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat));
 
                 if (jobList != null)
                 {
@@ -227,7 +285,18 @@ namespace FinalYearProjectApp
                     MathService mathService = new MathService();
                     mathService.setBoundingCircle(currentGPSLocation.Latitude, currentGPSLocation.Longitude);
                     UrlBuilder urlBuilder = new UrlBuilder();
-                    new GetData(this).Execute(UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat));
+
+                    if (Intent.Extras != null)
+                    {
+                        SearchIcon = Intent.Extras.GetString("SearchIcon");
+                        Url = UrlBuilder.getLocalJobsWithSearch(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat, SearchIcon);
+                    }
+                    else
+                    {
+                        Url = UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat);
+                    }
+
+                    new GetData(this).Execute(Url);//UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat));
 
                     if (jobList != null)
                     {
