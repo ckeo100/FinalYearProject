@@ -119,6 +119,8 @@ namespace FinalYearProjectApp.AppServices
         {
             var connnection = new SQLiteConnection(System.IO.Path.Combine(path, "UserJobAd"));
             connnection.DropTable<UserPotentialJob>();
+            var connnection1 = new SQLiteConnection(System.IO.Path.Combine(path, "user.db"));
+            connnection1.DropTable<User>();
         }
 
 

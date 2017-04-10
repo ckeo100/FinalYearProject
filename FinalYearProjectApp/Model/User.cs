@@ -138,6 +138,10 @@ namespace FinalYearProjectApp.Model
 
         }
 
+        internal List<UserPotentialJob> ShowUserJobAd(object userUID)
+        {
+            throw new NotImplementedException();
+        }
 
         public List<UserPotentialJob> ShowUserJobAd (Guid userID)
         {

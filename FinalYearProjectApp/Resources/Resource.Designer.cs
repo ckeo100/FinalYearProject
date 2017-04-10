@@ -1875,17 +1875,20 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b007a
 			public const int JobDetailsLinearLayout = 2131427450;
 			
-			// aapt resource value: 0x7f0b00aa
-			public const int JobListLinearLayout = 2131427498;
-			
 			// aapt resource value: 0x7f0b00ab
-			public const int LTVUserJobs = 2131427499;
+			public const int JobListLinearLayout = 2131427499;
+			
+			// aapt resource value: 0x7f0b00ac
+			public const int LTVUserJobs = 2131427500;
 			
 			// aapt resource value: 0x7f0b0081
 			public const int LinLayout = 2131427457;
 			
 			// aapt resource value: 0x7f0b0087
 			public const int MenuLinearLayout = 2131427463;
+			
+			// aapt resource value: 0x7f0b00a3
+			public const int ResgisterLinLayout = 2131427491;
 			
 			// aapt resource value: 0x7f0b008f
 			public const int action0 = 2131427471;
@@ -1986,8 +1989,8 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0086
 			public const int btnRegister = 2131427462;
 			
-			// aapt resource value: 0x7f0b00a9
-			public const int btnRegisterAccount = 2131427497;
+			// aapt resource value: 0x7f0b00aa
+			public const int btnRegisterAccount = 2131427498;
 			
 			// aapt resource value: 0x7f0b007c
 			public const int btnRemoveFromList = 2131427452;
@@ -1998,14 +2001,14 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b006a
 			public const int btnSendEmail = 2131427434;
 			
-			// aapt resource value: 0x7f0b00ac
-			public const int btnSendListToEmail = 2131427500;
-			
-			// aapt resource value: 0x7f0b0089
-			public const int btnToMapView = 2131427465;
+			// aapt resource value: 0x7f0b00ad
+			public const int btnSendListToEmail = 2131427501;
 			
 			// aapt resource value: 0x7f0b0088
-			public const int btnUserJobAd = 2131427464;
+			public const int btnToMapView = 2131427464;
+			
+			// aapt resource value: 0x7f0b0089
+			public const int btnUserJobAd = 2131427465;
 			
 			// aapt resource value: 0x7f0b0080
 			public const int button1 = 2131427456;
@@ -2073,23 +2076,23 @@ namespace FinalYearProjectApp
 			// aapt resource value: 0x7f0b0083
 			public const int etxLoginUserEmail = 2131427459;
 			
-			// aapt resource value: 0x7f0b00a6
-			public const int etxRegisterConfirmEmail = 2131427494;
+			// aapt resource value: 0x7f0b00a7
+			public const int etxRegisterConfirmEmail = 2131427495;
 			
-			// aapt resource value: 0x7f0b00a8
-			public const int etxRegisterConfirmPassword = 2131427496;
+			// aapt resource value: 0x7f0b00a9
+			public const int etxRegisterConfirmPassword = 2131427497;
+			
+			// aapt resource value: 0x7f0b00a6
+			public const int etxRegisterEmailAddress = 2131427494;
 			
 			// aapt resource value: 0x7f0b00a5
-			public const int etxRegisterEmailAddress = 2131427493;
+			public const int etxRegisterLastName = 2131427493;
+			
+			// aapt resource value: 0x7f0b00a8
+			public const int etxRegisterPassword = 2131427496;
 			
 			// aapt resource value: 0x7f0b00a4
-			public const int etxRegisterLastName = 2131427492;
-			
-			// aapt resource value: 0x7f0b00a7
-			public const int etxRegisterPassword = 2131427495;
-			
-			// aapt resource value: 0x7f0b00a3
-			public const int etxResgisterFirstName = 2131427491;
+			public const int etxResgisterFirstName = 2131427492;
 			
 			// aapt resource value: 0x7f0b0033
 			public const int expand_activities_button = 2131427379;

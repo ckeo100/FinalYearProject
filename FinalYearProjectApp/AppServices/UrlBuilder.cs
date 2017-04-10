@@ -45,7 +45,6 @@ namespace FinalYearProjectApp.AppServices
         public static string getLocalJobsWithSearch(double maxLongitude, double minLongitude, double maxLatitiude, double minLatitiude, string searchString)
         {
             StringBuilder strBuilder = new StringBuilder(baseUrl);
-            //https://api.mlab.com/api/1/databases/finalyearprojectdb/collections/Jobs?q={$and: [ { "JobAddress.Longitude":  {$gte: -1.89997322985873, $lt: -1.87043883014127}  }, { "JobAddress.Latitiude": {$gte: 52.4738174139408, $lt: 52.4918038460592}}, { $or : [ {"JobName": {"$regex": "software", $options: 'i'}}, {"JobTags": {"$regex": "software", $options: 'i'}} ] } ]}&apiKey=cCSf591FvBL9vhcrMqyvaLRQkT-je-vQ
             strBuilder.Append("?q={$and: [ { \"JobAddress.Longitude\":  {$gte: " + minLongitude + ", $lt: " + maxLongitude + "}  }, { \"JobAddress.Latitiude\": {$gte: " + minLatitiude + ", $lt: " + maxLatitiude + "}}, { $or: [{\"JobName\":{\"$regex\": \""+ searchString+ "\", $options: 'i'}},{\"JobTags\":{\"$regex\": \"" + searchString + "\", $options: 'i'}}]} ]}&apiKey=" + API_KEY);
             return strBuilder.ToString();
         }

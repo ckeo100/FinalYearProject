@@ -109,9 +109,15 @@ namespace FinalYearProjectApp
             }
             else
             {
-                var intent = new Intent(this, typeof(EmailContact));
-                intent.PutExtra("employeeEmail", jobItem.RecruiterContactDetails);
-                StartActivity(intent);
+                //var intent = new Intent(this, typeof(EmailContact));
+                //intent.PutExtra("employeeEmail", jobItem.RecruiterContactDetails);
+                //StartActivity(intent);
+                Intent email = new Intent(Intent.ActionSend);
+                email.PutExtra(Intent.ExtraEmail, new string[] { jobItem.RecruiterContactDetails });
+                //email.PutExtra(Intent.ExtraSubject, edtEmailSubject.Text.ToString());
+                //email.PutExtra(Intent.ExtraText, edtBodyText.Text.ToString());
+                email.SetType("message/rfc822");
+                StartActivity(Intent.CreateChooser(email, "Send Email"));
             }
         }
 

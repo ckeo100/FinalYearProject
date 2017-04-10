@@ -77,7 +77,7 @@ namespace FinalYearProjectApp
             
             alert.SetView(input);
             alert.SetTitle("Search For Jobs");
-            alert.SetMessage("Look for jobs with a title.");
+            alert.SetMessage("Look for jobs with keyword.");
             alert.SetPositiveButton("Search", (senderAlert, args) => {
                 string searchCriteria = input.Text.ToString();
                 if (!string.IsNullOrEmpty(searchCriteria))

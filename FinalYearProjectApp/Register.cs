@@ -24,12 +24,15 @@ namespace FinalYearProjectApp
         EditText edtPassword;
         EditText edtConfirmPassword;
         Button btnRegisterAccount;
+        LinearLayout linearLayout;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Register);
-
+            ActionBar.Hide();
+            linearLayout = FindViewById<LinearLayout>(Resource.Id.ResgisterLinLayout);
+            linearLayout.SetBackgroundColor(Android.Graphics.Color.ParseColor("#530053"));
             edtFirstName = FindViewById<EditText>(Resource.Id.etxResgisterFirstName);
             edtLastName = FindViewById<EditText>(Resource.Id.etxRegisterLastName);
             edtEmail = FindViewById<EditText>(Resource.Id.etxRegisterEmailAddress);
@@ -37,8 +40,10 @@ namespace FinalYearProjectApp
             edtPassword = FindViewById<EditText>(Resource.Id.etxRegisterPassword);
             edtConfirmPassword = FindViewById<EditText>(Resource.Id.etxRegisterConfirmPassword);
             btnRegisterAccount = FindViewById<Button>(Resource.Id.btnRegisterAccount);
+            btnRegisterAccount.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             edtPassword.InputType = Android.Text.InputTypes.TextVariationPassword | Android.Text.InputTypes.ClassText;
             edtConfirmPassword.InputType = Android.Text.InputTypes.TextVariationPassword | Android.Text.InputTypes.ClassText;
+            
             btnRegisterAccount.Click += btnRegisterAccount_Click;
             
         }

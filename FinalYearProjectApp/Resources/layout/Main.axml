@@ -33,15 +33,15 @@
         android:layout_marginTop="13.0dp"
         android:layout_marginBottom="21.0dp" />
     <Button
+        android:text="Search For Jobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnToMapView" />
+    <Button
         android:text="View Your Jobs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnUserJobAd"
         android:layout_marginTop="13.0dp"
         android:layout_marginBottom="13.0dp" />
-    <Button
-        android:text="Search For Jobs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnToMapView" />
 </LinearLayout>

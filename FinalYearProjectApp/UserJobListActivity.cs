@@ -32,6 +32,7 @@ namespace FinalYearProjectApp
         private JobModel jobModel;
         public UserModel userModel;
         LinearLayout linearLayout;
+        public User currentUser; 
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,7 +46,7 @@ namespace FinalYearProjectApp
             btnEmailToUser.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             userModel = new UserModel();
             userManager = new FinalYearProjectClassLibrary.Controllers.UserController();
-            var currentUser = userModel.getCurrentUser();
+            currentUser = userModel.getCurrentUser();
             //jobTempRepository = new JobsTempRepository();
             //userModel.ShowUserJobAd()
             //List<UserPotentialJob> cureentUserPotetnialJobList = new List<UserPotentialJob>();
@@ -65,6 +66,20 @@ namespace FinalYearProjectApp
             UserJobAdView.ItemClick += UserJobAdView_ItemClick;
             UserJobAdView.ItemLongClick += UserJobAdView_ItemLongClick;
             Window.SetTitle(userModel.user.UserEmail);
+
+            if (userJobs.Count == 0)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.SetTitle("Warning");
+                alert.SetMessage("There are no jobs in your list.");
+                alert.SetNegativeButton("Close", (senderAlert, args) => {
+                    //Toast.MakeText(this, "Cancelled!", ToastLength.Short).Show();
+                });
+
+                Dialog dialog = alert.Create();
+                dialog.Show();
+
+            }
         }
 
         private void UserJobAdView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
@@ -75,8 +90,14 @@ namespace FinalYearProjectApp
             alert.SetMessage("Are you sure you want to remove this job from your list.");
             alert.SetPositiveButton("Remove", (senderAlert, args) => {
                 userModel.RemoveJobAdFromUserList(job.jobGuid);
-                var intent = new Intent(this, typeof(UserJobAdActivity));
-                StartActivity(intent);
+                //var intent = new Intent(this, typeof(UserJobAdActivity));
+                //StartActivity(intent);
+                //super.notifyDataSetChanged();
+                //this.UserJobAdView.no
+                UserJobAdView.DestroyDrawingCache();
+                userJobs = userModel.ShowUserJobAd(this.currentUser.UserUID);
+                UserJobAdView.Adapter = new JobListAdaptor(this, userJobs);
+
                 Toast.MakeText(this, "Removed!", ToastLength.Short).Show();
             });
 

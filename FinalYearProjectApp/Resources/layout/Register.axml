@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/LinLayout">
+    android:id="@+id/ResgisterLinLayout">
     <TextView
         android:text="Register"
         android:textAppearance="?android:attr/textAppearanceLarge"
