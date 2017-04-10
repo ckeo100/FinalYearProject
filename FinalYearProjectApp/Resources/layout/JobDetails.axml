@@ -22,7 +22,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lblEmplymentType"/>
+            android:id="@+id/lblEmplymentType" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblAdditionalQualificationsAndSkills"
-            android:layout_marginTop="17.0dp"/>
+            android:layout_marginTop="17.0dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="78.0dp"
@@ -77,6 +77,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnContectButton"
+            android:layout_marginTop="13.0dp"
+            android:layout_marginBottom="12.5dp" />
+      <Button
+            android:text="Back to list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnListJobList"
             android:layout_marginTop="13.0dp"
             android:layout_marginBottom="12.5dp" />
         <Button

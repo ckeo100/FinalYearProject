@@ -17,6 +17,7 @@ namespace FinalYearProjectApp
     public class MainActivity : Activity
     {
         //public Button btnUserLocation;
+        //public Button btnMenuButton;
         public Button btnUserList;
         public Button btnGoToMapView;
         LinearLayout linearLayout; 
@@ -33,10 +34,17 @@ namespace FinalYearProjectApp
             btnUserList.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             btnGoToMapView = FindViewById<Button>(Resource.Id.btnToMapView);
             btnGoToMapView.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
+            //btnMenuButton = FindViewById<Button>(Resource.Id.btnMenu);
+            //btnMenuButton.Click += btnMenuButton_Click;
             HandleEvents();
             // Set our view from the "main" layout resource
 
         }
+
+        //private void btnMenuButton_Click(object sender, EventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         private void HandleEvents()
         {

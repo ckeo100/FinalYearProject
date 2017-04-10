@@ -32,7 +32,8 @@ namespace FinalYearProjectApp
         private JobModel jobModel;
         public UserModel userModel;
         LinearLayout linearLayout;
-        public User currentUser; 
+        public User currentUser;
+        public Button btnMenu;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -44,6 +45,8 @@ namespace FinalYearProjectApp
             UserJobAdView = FindViewById<ListView>(Resource.Id.LTVUserJobs);
             btnEmailToUser = FindViewById<Button>(Resource.Id.btnSendListToEmail);
             btnEmailToUser.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
+            btnMenu = FindViewById<Button>(Resource.Id.btnMenuJobList);
+            btnMenu.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             userModel = new UserModel();
             userManager = new FinalYearProjectClassLibrary.Controllers.UserController();
             currentUser = userModel.getCurrentUser();
@@ -65,6 +68,7 @@ namespace FinalYearProjectApp
             UserJobAdView.FastScrollEnabled = true;
             UserJobAdView.ItemClick += UserJobAdView_ItemClick;
             UserJobAdView.ItemLongClick += UserJobAdView_ItemLongClick;
+            btnMenu.Click += btnMenu_Click;//+= btnMenu_Click();
             Window.SetTitle(userModel.user.UserEmail);
 
             if (userJobs.Count == 0)
@@ -80,6 +84,11 @@ namespace FinalYearProjectApp
                 dialog.Show();
 
             }
+        }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(MainActivity));
         }
 
         private void UserJobAdView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)

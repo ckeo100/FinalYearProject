@@ -38,6 +38,7 @@ namespace FinalYearProjectApp
         public TextView txvJobDescriptionText;
         public Button btnContactButton;
         public Button btnRemoveButtonFormList;
+        public Button btnBackToList;
         public Guid jobGuid;
         string jobString;
         LinearLayout linearLayout;
@@ -62,8 +63,11 @@ namespace FinalYearProjectApp
             btnContactButton.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             btnRemoveButtonFormList = FindViewById<Button>(Resource.Id.btnRemoveFromList);
             btnRemoveButtonFormList.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
+            btnBackToList = FindViewById<Button>(Resource.Id.btnListJobList);
+            btnBackToList.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
             btnContactButton.Click += btnContactButton_Click;
             btnRemoveButtonFormList.Click += btnRemoveButtonFormList_Click;
+            btnBackToList.Click += btnBackToList_Click;
             jobString = Intent.Extras.GetString("selectedJobGuid");
 
             //jobItem = new Job();
@@ -75,6 +79,11 @@ namespace FinalYearProjectApp
 
 
             // Create your application here
+        }
+
+        private void btnBackToList_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(UserJobAdActivity));
         }
 
         private async void btnRemoveButtonFormList_Click(object sender, EventArgs e)

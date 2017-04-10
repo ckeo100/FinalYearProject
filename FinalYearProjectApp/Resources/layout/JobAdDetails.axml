@@ -21,7 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/lblJobName"
-                android:layout_marginBottom="20.5dp" />
+                android:layout_marginBottom="20.5dp"
+                android:layout_marginRight="153.5dp" />
             <TextView
                 android:text="Employment type:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -76,7 +77,7 @@
                 android:layout_marginTop="13.0dp" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:scrollbars="vertical"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:id="@+id/txvJobDescription" />
@@ -86,6 +87,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13.0dp" />
+            <Button
+                android:text="Back To Map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnMenuJobAdDetails"
+                android:layout_marginTop="19.0dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -41,6 +41,8 @@ namespace FinalYearProjectApp
         ImageButton btnSearchIcon;
         string SearchIcon;
         public string Url; 
+        public Button btnMenu;
+        public Button btnAdList;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -64,10 +66,24 @@ namespace FinalYearProjectApp
             }
             //string url = UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat);
             btnSearchIcon = FindViewById<ImageButton>(Resource.Id.btnSearchIcon);
+            btnMenu = FindViewById<Button>(Resource.Id.btnMenu);
+            btnAdList = FindViewById<Button>(Resource.Id.btnAdList);
             btnSearchIcon.Click += searchIcon_Click;
+            btnMenu.Click += btnMenu_Click;
+            btnAdList.Click += btnAdList_Click;
             new GetData(this).Execute(Url);//UrlBuilder.getLocalJobs(mathService.maxLong,mathService.minLong, mathService.maxLat,mathService.minLat));
 
 
+        }
+
+        private void btnAdList_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(UserJobAdActivity));
+        }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(MainActivity));
         }
 
         private void searchIcon_Click(object sender, EventArgs e)

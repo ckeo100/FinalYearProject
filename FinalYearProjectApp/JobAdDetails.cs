@@ -29,6 +29,7 @@ namespace FinalYearProjectApp
         public TextView txvAddtionalQualificationsAndSkillsText;
         public TextView txvJobDescriptionText;
         public Button btnAddJobToList;
+        public Button btnMenu;
         public Guid jobGuid;
         string jobString;//= Intent.Extras.GetString("selectedJobGuid");
         LinearLayout linearLayout;
@@ -54,6 +55,9 @@ namespace FinalYearProjectApp
             txvJobDescriptionText.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             btnAddJobToList = FindViewById<Button>(Resource.Id.btnAddJobList);
             btnAddJobToList.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
+            btnMenu = FindViewById<Button>(Resource.Id.btnMenuJobAdDetails);
+            btnMenu.SetBackgroundColor(Android.Graphics.Color.ParseColor("#B00035"));
+            btnMenu.Click += btnMenu_Click;
 
             jobString = Intent.Extras.GetString("selectedJobGuid");
             new GetData(this).Execute(UrlBuilder.getJobSingle(jobString));
@@ -62,7 +66,10 @@ namespace FinalYearProjectApp
 
         }
 
-
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(Map));
+        }
 
         private void addToListButton_Click(object sender, EventArgs e)
         {
