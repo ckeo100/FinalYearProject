@@ -20,11 +20,12 @@ using Java.Lang;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Java.Lang;
 
 namespace FinalYearProjectApp
 {
     [Activity(Label = "Map")]
-    public class Map : Activity, IOnMapReadyCallback, ILocationListener
+    public class Map : Activity, IOnMapReadyCallback, ILocationListener//, //Java.Lang.Object
     {
         static readonly string TAG = "X:" + typeof(MainActivity).Name;
         private GoogleMap gMap;
@@ -33,7 +34,7 @@ namespace FinalYearProjectApp
         double longitude;
         public Location currentGPSLocation;
         LocationManager locationManager;
-        //string locationProvider;
+        string locationProvider;
         public JobAdModel jobAdModel = new JobAdModel();
         public JobModel jobModel = new JobModel();
         public List<Job> jobList = new List<Job>();
@@ -49,8 +50,11 @@ namespace FinalYearProjectApp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.MapView);
             ActionBar.Hide();
+            //Create a new list of jobs
             jobAds = new List<JobAd>();
+            //Initialise the location manager 
             InitializeLocationManager();
+            // assign the current location using the last know location 
             currentGPSLocation = getLastKnownLocation();
             MathService mathService = new MathService();
             mathService.setBoundingCircle(currentGPSLocation.Latitude,currentGPSLocation.Longitude);
@@ -116,7 +120,7 @@ namespace FinalYearProjectApp
             Dialog dialog = alert.Create();
             dialog.Show();
         }
-
+        //accquire the list of jobs and makes a http command call to them
         private class GetData :AsyncTask<string, Java.Lang.Void, string>
         {
             private ProgressDialog pd = new ProgressDialog(Application.Context);
@@ -159,21 +163,21 @@ namespace FinalYearProjectApp
             {
                 Accuracy = Accuracy.Fine
             };
+            //}
+
+
+            IList<string> acceptableLocationProviders = locationManager.GetProviders(criteriaForLocationService, true);
+
+            if (acceptableLocationProviders.Any())
+            {
+                locationProvider = acceptableLocationProviders.First();
+            }
+            else
+            {
+                locationProvider = string.Empty;
+            }
+            Log.Debug(TAG, "Using" + locationProvider + ".");
         }
-
-
-            //IList<string> acceptableLocationProviders = locationManager.GetProviders(criteriaForLocationService, true);
-
-            //if (acceptableLocationProviders.Any())
-            //{
-            //    locationProvider = acceptableLocationProviders.First();
-            //}
-            //else
-            //{
-            //    locationProvider = string.Empty;
-            //}
-            //Log.Debug(TAG, "Using" + locationProvider + ".");
-        //}
 
         public void OnProviderDisabled(string provider)
         {
@@ -214,21 +218,21 @@ namespace FinalYearProjectApp
                 longitude = currentGPSLocation.Longitude;
                 userPostion = new LatLng(latitude, longitude);
 
-                MathService mathService = new MathService();
-                mathService.setBoundingCircle(currentGPSLocation.Latitude, currentGPSLocation.Longitude);
-                UrlBuilder urlBuilder = new UrlBuilder();
+                //MathService mathService = new MathService();
+                //mathService.setBoundingCircle(currentGPSLocation.Latitude, currentGPSLocation.Longitude);
+                //UrlBuilder urlBuilder = new UrlBuilder();
 
-                if (Intent.Extras != null)
-                {
-                    SearchIcon = Intent.Extras.GetString("SearchIcon");
-                    Url = UrlBuilder.getLocalJobsWithSearch(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat, SearchIcon);
-                }
-                else
-                {
-                    Url = UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat);
-                }
+                //if (Intent.Extras != null)
+                //{
+                //    SearchIcon = Intent.Extras.GetString("SearchIcon");
+                //    Url = UrlBuilder.getLocalJobsWithSearch(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat, SearchIcon);
+                //}
+                //else
+                //{
+                //    Url = UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat);
+                //}
 
-                new GetData(this).Execute(Url);//UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat));
+                //new GetData(this).Execute(Url);//UrlBuilder.getLocalJobs(mathService.maxLong, mathService.minLong, mathService.maxLat, mathService.minLat));
 
                 if (jobList != null)
                 {
@@ -260,7 +264,7 @@ namespace FinalYearProjectApp
             }
 
         }
-
+        // handles the event of the user clicking on a marker 
         public void onMakerClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
         {
             List<JobAd> jobAdList = jobAds;
@@ -277,9 +281,11 @@ namespace FinalYearProjectApp
 
         }
 
-        public async void OnLocationChanged(Location location)
+        //detects when there is a change in location and updates the system respective
+        public void OnLocationChanged(Location location)
         {
             currentGPSLocation = location;
+            Toast.MakeText(this, "Location has changed", ToastLength.Short).Show();
             if (currentGPSLocation == null)
             {
                 //locationText.Text = "Unable to determine your location. Try again in a short while.";
@@ -349,7 +355,7 @@ namespace FinalYearProjectApp
 
 
         }
-
+        // acquires the best possible location using the list of possible providers 
         private Location getLastKnownLocation()
         {
             List<string> providers = new List<string>(locationManager.GetProviders(true));

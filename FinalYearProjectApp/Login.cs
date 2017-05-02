@@ -48,9 +48,10 @@ namespace FinalYearProjectApp
             
         }
 
+        //code for the login button
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            
             string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var db = new SQLiteConnection(System.IO.Path.Combine(path, "user.db"));
             var userTable = db.Table<User>();
